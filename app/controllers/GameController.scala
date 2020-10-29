@@ -8,8 +8,8 @@ class GameController {
 
   val supervisor:supervisor = new supervisor;
   val controller:Controller = new Controller;
-  val C = scala.main.c;
-  val tui:TUI = new TUI;
+  //val C = scala.main.controller;
+  //val tui:TUI = new TUI;
 /*
   def index = Action {
     Result(
