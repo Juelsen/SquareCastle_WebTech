@@ -1,21 +1,51 @@
 package controllers
-import aview.TUI.TUI
-import gamecontrol.supervisor.supervisor
-import gamecontrol.controller.Controller
+
+import aview.TUI.{TUI, TUIInterface}
+import gamecontrol.supervisor.{SupervisorInterface, supervisor}
+import gamecontrol.controller.{Controller, ControllerInterface}
+import gamecontrol.updateEvent
+import javax.inject.Inject
+import play.api.mvc.{AbstractController, Action, AnyContent, ControllerComponents, WebSocket}
+import play.api.i18n.I18nSupport
+
+import scala.main.{supervisor, tui}
+import scala.swing.Reactor
 
 
-class GameController {
+class GameController @Inject() (cc:ControllerComponents) extends AbstractController(cc) with I18nSupport with Reactor{
 
-  val supervisor:supervisor = new supervisor;
-  val controller:Controller = new Controller;
-  //val C = scala.main.controller;
-  //val tui:TUI = new TUI;
-  //Github Test
-/*
-  def index = Action {
-    Result(
-      header = ResponseHeader(200, Map.empty),
-      body = HttpEntity.Strict(ByteString("Hello world!"), Some("text/plain"))
-    )
-  }*/
+  val supervisor: SupervisorInterface = scala.main.supervisor
+  val controller: ControllerInterface = scala.main.Controller
+  supervisor.controller = controller
+  this.listenTo(supervisor.controller)
+
+  reactions += {
+    case event : updateEvent=>
+    if(event.code == 0)
+      sendline(event.word)
+    if(event.code == 1)
+      send(event.word)
+  }
+  def sendline(s: String) = Action {
+    Ok(views.html.squarecastle(1,s,supervisor.playersturn))
+  }
+  def send(s: String) = Action {
+    Ok(views.html.squarecastle(0,s,supervisor.playersturn))
+  }
+  def put(s: String): Action[AnyContent] = Action {
+    supervisor.controller.befehl = s;
+    supervisor.newRound()
+    supervisor.state = !supervisor.state
+    Ok(views.html.squarecastle(1,"gesendet",supervisor.playersturn))
+
+  }
+  def squarecastle: Action[AnyContent] = Action{
+    supervisor.testfall();
+    supervisor.newRound();
+    Ok(views.html.squarecastle(1,"WILLKOMMEN BEI SQUARECASTLE",supervisor.playersturn))
+  }
+
+  def about(): Action[AnyContent] = Action {
+    Ok(views.html.index())
+  }
 }
