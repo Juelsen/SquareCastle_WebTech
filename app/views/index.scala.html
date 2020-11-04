@@ -1,20 +1,40 @@
-@*
- * This template takes a single argument, a String containing a
- * message to display.
- *@
-@(message: String)
-@*
- * Call the `main` template with two arguments. The first
- * argument is a `String` with the title of the page, the second
- * argument is an `Html` object containing the body of the page.
- *@
-@main("Willkommen bei SquareCastle") {
+@()
 
-    @*
-     * Get an `Html` object by calling the built-in Play welcome
-     * template and passing a `String` message.
-     *@
-    @welcome(message, style = "scala")
+@main("SquareCastle") {
+    <div style="text-align: center">
+        <br><br><br>
+        <h1>SquareCastle</h1>
+        <img src=@routes.Assets.versioned("images/castle.png")>
+        <h2>SquareCastle is a turn-based two-player game.</h2>
+        <br>
+        <h2>Game principle:</h2>
 
+        <p>
+            Each player is assigned a random card. He can then place it anywhere on the playing field. <br>
+            The goal is to collect as many points as possible. <br>
+            You get points by placing your card on a card that is already on the field. <br>
+        </p>
+        <br><br>
+        <h3>There are different types of cards:</h3>
+        <p>
+            meadow, castle and road pieces. <br>
+            For example, a card can also show a meadow and castle.
+            You can only place castle pieces on other castle pieces. <br>
+            The examples below show what works and what does not: <br>
+        </p>
+        <br><br>
+        <h3>How to collect points:</h3>
+        <p>
+            For castle pieces you get 2 points credited to your account. <br>
+            For roads you get one point and for meadows zero. <br>
+            The longer the chain of cards, the more points you get. <br>
+            So if you add another card to two already adjoining parts of a castle, you will get 6 points in total.
+        </p>
+        <br><br>
+        <h2>But enough rules for today.. <br> Start playing and destroy some friendships!</h2>
+
+        <p> Test </p>
+
+    </div>
 }
 
