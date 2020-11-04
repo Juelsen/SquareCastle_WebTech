@@ -39,7 +39,7 @@ class GameController @Inject() (cc:ControllerComponents) extends AbstractControl
     supervisor.state = !supervisor.state
     supervisor.newRound()
 
-    Ok(views.html.squarecastle(1,"gesendet","",supervisor.playersturn))
+    Ok(views.html.squarecastle(1,"ERFOLGREICH GESENDET!","",supervisor.playersturn))
 
   }
   def squarecastle: Action[AnyContent] = Action{

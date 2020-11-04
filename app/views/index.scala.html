@@ -3,8 +3,8 @@
 @main("SquareCastle") {
     <div style="text-align: center">
         <br><br><br>
-        <h1>SquareCastle</h1>
-        <img src=@routes.Assets.versioned("images/castle.png")>
+        <img src="@routes.Assets.versioned("images/title.png")" width="600"> <br> <br>
+        <img src="@routes.Assets.versioned("images/castle.png")" width="200"> <br> <br>
         <h2>SquareCastle is a turn-based two-player game.</h2>
         <br>
         <h2>Game principle:</h2>
@@ -18,20 +18,32 @@
         <h3>There are different types of cards:</h3>
         <p>
             meadow, castle and road pieces. <br>
-            For example, a card can also show a meadow and castle. <br>
-            You can only place castle pieces on other castle pieces. <br>
-            The examples below show what works and what does not: <br>
+            For example, a card can also show a meadow and castle. <br><br>
+            <img src="@routes.Assets.versioned("images/meadowCastle.png")" width="80"> <br><br>
+            You can for example only place castle pieces on other castle pieces. <br>
+            The examples below show what works and what does not: <br> <br>
+            <img src="@routes.Assets.versioned("images/left.png")" width="80">
+            <img src="@routes.Assets.versioned("images/yesRight.png")" width="80">
+            <img src="@routes.Assets.versioned("images/haken.png")" width="80"> <br><br>
+            <img src="@routes.Assets.versioned("images/left.png")" width="80">
+            <img src="@routes.Assets.versioned("images/falseRight.png")" width="80">
+            <img src="@routes.Assets.versioned("images/kreuz.png")" width="80">
         </p>
-        <br><br>
+        <br>
         <h3>How to collect points:</h3>
         <p>
             For castle pieces you get 2 points credited to your account. <br>
-            For roads you get one point and for meadows zero. <br>
+            For roads you get 1 point and for meadows 0 points. <br>
             The longer the chain of cards, the more points you get. <br>
             So if you add another card to two already adjoining parts of a castle, you will get 6 points in total.
-        </p>
+        </p> <br>
+        <img src="@routes.Assets.versioned("images/left.png")" width="80">
+        <img src="@routes.Assets.versioned("images/mid.png")" width="80">
+        <img src="@routes.Assets.versioned("images/yesRight.png")" width="80"> <br>
+        <p>2 + 2 + 2 = 6</p>
         <br><br>
         <h2>But enough rules for today.. <br> <br> <a href="squarecastle">Start playing and destroy some friendships!</a> </h2>
+        <br><br><br><br>
 
     </div>
 }

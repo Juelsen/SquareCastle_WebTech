@@ -15,33 +15,31 @@
  * argument is an `Html` object containing the body of the page.
  *@
 @main("Willkommen bei SquareCastle") {
-    <h1>WILLKOMMEN BEI SQUARECASTLE</h1>
-    <div class="info">
-        <p>Use URL to play SQUARECASTLE</p>
-    </div>
-    <div class="player">
-        <p>Its player @p turn!!</p>
-    </div>
+    <div style="text-align: center">
+        <br><br><br>
+        <img src="@routes.Assets.versioned("images/title.png")" width="600"> <br> <br>
+        <div class="info">
+            <p>You can use the URL to play SquareCastle</p>
+            <p>just type: ".../i 0 0" to place a card at the first field</p>
+        </div>
+        <div class="player">
+            <br><br>
+            <a style="color: #000000">It's</a> <a style="color: #cc0000">@p's</a> <a style="color: #000000">turn!!</a>
+        </div>
 
-
-    <div class="Ausgabe">
-        <br>
-        <br>
-        <br>
-        <br>
+        <div class="Ausgabe" style="color: green">
+        <br><br><br>
         @s
-    </div>
-    <div class="Ausgabe">
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
+        </div>
+
+        <div class="Ausgabe">
+        <br><br><br><br><br>
         @s2
+        </div>
+        @*
+         * Get an `Html` object by calling the built-in Play welcome
+         * template and passing a `String` message.
+         *@
     </div>
-    @*
-     * Get an `Html` object by calling the built-in Play welcome
-     * template and passing a `String` message.
-     *@
 }
 
