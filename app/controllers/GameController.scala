@@ -27,22 +27,26 @@ class GameController @Inject() (cc:ControllerComponents) extends AbstractControl
       send(event.word)
   }
   def sendline(s: String) = Action {
-    Ok(views.html.squarecastle(1,s,supervisor.playersturn))
+    Ok(views.html.squarecastle(1,"empfangen",s ,supervisor.playersturn))
   }
   def send(s: String) = Action {
-    Ok(views.html.squarecastle(0,s,supervisor.playersturn))
+    Ok(views.html.squarecastle(0,"empfangen",s ,supervisor.playersturn))
   }
   def put(s: String): Action[AnyContent] = Action {
-    supervisor.controller.befehl = s;
-    supervisor.newRound()
+    controller.befehl = s
+    //supervisor.controller.befehl = s;
+    supervisor.newRoundactive()
     supervisor.state = !supervisor.state
-    Ok(views.html.squarecastle(1,"gesendet",supervisor.playersturn))
+    supervisor.newRound()
+
+    Ok(views.html.squarecastle(1,"gesendet","",supervisor.playersturn))
 
   }
   def squarecastle: Action[AnyContent] = Action{
     supervisor.testfall();
-    supervisor.newRound();
-    Ok(views.html.squarecastle(1,"WILLKOMMEN BEI SQUARECASTLE",supervisor.playersturn))
+    supervisor.newRound()
+
+    Ok(views.html.squarecastle(1,"STARTE SPIEL","",supervisor.playersturn))
   }
 
   def about(): Action[AnyContent] = Action {

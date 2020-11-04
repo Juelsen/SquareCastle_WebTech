@@ -8,27 +8,36 @@
  * This template takes a single argument, a String containing a
  * message to display.
  *@
-@(mode:Int,s:String,p:PlayerInterface)
+@(mode:Int,s:String,s2:String,p:PlayerInterface)
 @*
  * Call the `main` template with two arguments. The first
  * argument is a `String` with the title of the page, the second
  * argument is an `Html` object containing the body of the page.
  *@
 @main("Willkommen bei SquareCastle") {
+    <h1>WILLKOMMEN BEI SQUARECASTLE</h1>
+    <div class="info">
+        <p>Use URL to play SQUARECASTLE</p>
+    </div>
     <div class="player">
         <p>Its player @p turn!!</p>
     </div>
 
-    <div class="info">
-        <p>Use URL to play SQUARECASTLE</p>
-    </div>
-    <div class="printline">
+
+    <div class="Ausgabe">
+        <br>
+        <br>
+        <br>
         <br>
         @s
     </div>
-    <div class="print">
+    <div class="Ausgabe">
         <br>
-        @s
+        <br>
+        <br>
+        <br>
+        <br>
+        @s2
     </div>
     @*
      * Get an `Html` object by calling the built-in Play welcome
