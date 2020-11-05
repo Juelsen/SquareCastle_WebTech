@@ -12,7 +12,7 @@ import scala.main.{supervisor, tui}
 import scala.swing.Reactor
 
 
-class GameController @Inject() (cc:ControllerComponents) extends AbstractController(cc) with I18nSupport with Reactor{
+class SquarecastleController @Inject()(cc:ControllerComponents) extends AbstractController(cc) with I18nSupport with Reactor{
 
   val supervisor: SupervisorInterface = scala.main.supervisor
   val controller: ControllerInterface = scala.main.Controller
