@@ -14,12 +14,13 @@
 * argument is an `Html` object containing the body of the page.
 *@
 @main("Willkommen bei SquareCastle") {
+    <link rel="stylesheet" href='@routes.Assets.versioned("stylesheets/main.css")' />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
     <div class="container">
         <div class="row">
             <div class="col-2">
-                <div class="player">
+                <div class="player green">
                     <p>Its player @supervisor.playersturn turn!!</p>
                 </div>
             </div>
