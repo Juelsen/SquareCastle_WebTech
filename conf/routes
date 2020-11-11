@@ -3,9 +3,9 @@
 # ~~
 
 # An example controller showing a sample home page
-GET     /                           controllers.SquarecastleController.about()
-GET     /squarecastle               controllers.SquarecastleController.squarecastle
-GET     /squarecastle/:column       controllers.SquarecastleController.put(column:String)
+GET     /                           controllers.GameController.about()
+GET     /squarecastle               controllers.GameController.squarecastle
+GET     /squarecastle/:column       controllers.GameController.put(column:String)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
