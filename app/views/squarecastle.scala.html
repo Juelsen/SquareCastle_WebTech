@@ -24,79 +24,102 @@
                 location.href = "/"+str;
             }
     </script>
-    @navbar()
-    <div class="container-fluid background-img">
 
+    <div class="container-fluid background-img">
         <div class="row">
-            <div class="col-2">
-                <div class="player">
-                    <div class="row">
-                        <div class="col-12 player-height">
-                            <div class="blue-player"></div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12 player-height">
-                            <div class="red-player"></div>
-                        </div>
-                    </div>
-                    @*<p>Its player</p>
-                    <p class="green-text">@supervisor.playersturn 's</p>
-                    <p>turn!!</p>*@
-                </div>
+            <div class="col-lg-12">
+                @navbar()
             </div>
-            <div class="col-8 mid-max-width">
+        </div>
+        <div class="row">
+            <div class="col-2 col-xl-3"></div>
+            <div class="col-10 col-xl-9">
                 <div class="row">
-                    <div class="col-12">
-                        <div class="header-row">
-                            <img src="@routes.Assets.versioned("images/title.png")" width="600">
-                        </div>
-                    </div>
-                </div>
-                @for(y <- 0 until 6) {
-                    <div class="row">
-                    @for(x <- 0 until 12) {
-                        <div class="col-1">
-                            <div id="@x@y" onclick="clickEvent('i @x @y')">
-                                <img src=@routes.Assets.versioned(supervisor.controller.ImagePath(supervisor.map.field(x)(y), supervisor.card))>
+                    <div class="col-10 col-xl-8">
+                        <div class="row">
+                            <div class="col-xl-2"></div>
+                            <div class="col-12 col-xl-8">
+                                <div class="title">
+                                    <img src="@routes.Assets.versioned("images/title.png")" width="600">
+                                </div>
                             </div>
-                        </div>
-                    }
-                    </div>
-                }
-                <div class="row">
-                    <div class="col-12 left-column">
-                        <div class="bottom-row">
-                            <div class="toolbar">
-                                <a href="">
-                                    <button class="rotateLeft-button"></button>
-                                </a>
-                                <a href="">
-                                    <button class="pause-button"></button>
-                                </a>
-                                <a href="">
-                                    <button class="rotateRight-button"></button>
-                                </a>
-                            </div>
+                            <div class="col-xl-2"></div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-2">
-                <div class="row">
-                    <div>
+                    <div class="col-2 col-xl-4">
                         <a href="home">
                             <button class="home-button"></button>
                         </a>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-lg-2 col-xl-3">
                 <div class="row">
-                    <div>
-                        <a href="home">
-                            <button type="button" class="btn btn-warning button-circle btn-md help-button">HELP</button>
-                        </a>
+                    <div class="col-6 col-lg-12">
+                        <div class="blue-player"></div>
+                    </div>
+                    <div class="col-6 col-lg-12">
+                        <div class="red-player"></div>
                     </div>
                 </div>
+                @*<p>Its player</p>
+                <p class="green-text">@supervisor.playersturn 's</p>
+                <p>turn!!</p>*@
+            </div>
+            <div class="col-12 col-lg-10 col-xl-9">
+                <div class="row">
+                    <div class="col-lg-10 col-xl-8">
+                    @for(y <- 0 until 6) {
+                        <div class="row">
+                        @for(x <- 0 until 12) {
+                            <div class="col-1">
+                                <div id="@x@y" onclick="clickEvent('i @x @y')">
+                                <img src=@routes.Assets.versioned(supervisor.controller.ImagePath(supervisor.map.field(x)(y), supervisor.card))>
+                            </div>
+                        </div>
+                    }
+                    </div>
+                    }
+                    </div>
+                    <div class="col-lg-2 col-xl-4">
+                        <div class="row">
+                            <div>
+                                <a href="">
+                                    <button type="button" class="btn btn-warning button-circle btn-md help-button">HELP</button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4"></div>
+            <div class="col-4">
+                <div class="toolbar">
+                    <div class="row">
+                        <div class="col-4">
+                            <a href="">
+                                <button class="rotateLeft-button"></button>
+                            </a>
+                        </div>
+                        <div class="col-4">
+                            <a href="">
+                                <button class="pause-button"></button>
+                            </a>
+                        </div>
+                        <div class="col-4">
+                            <a href="">
+                                <button class="rotateRight-button"></button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+
             </div>
         </div>
     </div>
