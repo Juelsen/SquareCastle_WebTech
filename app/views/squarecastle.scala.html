@@ -57,10 +57,10 @@
         <div class="row">
             <div class="col-12 col-lg-2 col-xl-3">
                 <div class="row">
-                    <div class="col-6 col-lg-12">
+                    <div class="col-12 col-sm-6 col-lg-12">
                         <div class="blue-player"></div>
                     </div>
-                    <div class="col-6 col-lg-12">
+                    <div class="col-12 col-sm-6 col-lg-12">
                         <div class="red-player"></div>
                     </div>
                 </div>
@@ -74,7 +74,7 @@
                     @for(y <- 0 until 6) {
                         <div class="row">
                         @for(x <- 0 until 12) {
-                            <div class="col-1">
+                            <div class="col-1 grid-hover">
                                 <div id="@x@y" onclick="clickEvent('i @x @y')">
                                 <img src=@routes.Assets.versioned(supervisor.controller.ImagePath(supervisor.map.field(x)(y), supervisor.card))>
                             </div>
