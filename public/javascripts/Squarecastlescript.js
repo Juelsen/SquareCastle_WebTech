@@ -1,9 +1,15 @@
-src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"
-$(".grid-hover").click(function (){
-    calc($(this).id)
-})
-
-
-function calc(id){
-
+function addclicklistener(id){
+    $(id).click(function (){
+        calc(id)
+    })
 }
+
+function calc(str){
+    console.log("click")
+    if(!str.includes("squarecastle"))
+        str = "squarecastle/" + str;
+    location.href = "/"+str;
+}
+$( document ).ready(function (){
+    addclicklistener();
+})
