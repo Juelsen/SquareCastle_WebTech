@@ -1,14 +1,17 @@
 package controllers
 
 import aview.TUI.{TUI, TUIInterface}
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.module.scala.ScalaObjectMapper
 import gamecontrol.supervisor.{SupervisorInterface, supervisor}
 import gamecontrol.controller.{Controller, ControllerInterface}
 import gamecontrol.{InsertedEvent, updateEvent}
+import gamemodel.model.MapInterface
 import javax.inject.Inject
-import play.api.mvc.{AbstractController, Action, AnyContent, ControllerComponents, WebSocket}
+import play.api.mvc.{AbstractController, Action, AnyContent, ControllerComponents, Request, WebSocket}
 import play.api.i18n.I18nSupport
+import play.api.libs.json.{JsArray, JsPath, JsValue, Json, Writes}
 
-import scala.main.{supervisor, tui}
 import scala.swing.Reactor
 
 
@@ -19,13 +22,12 @@ class GameController @Inject() (cc:ControllerComponents) extends AbstractControl
   supervisor.controller = controller
   var str:String = ""
 
-  this.listenTo(controller)
-  reactions += {
-    case event: InsertedEvent =>
-        this.send(supervisor)
+  //this.listenTo(controller)
+  //reactions += {
+  //  case event: InsertedEvent =>
+  //      this.send(supervisor)
 
-  }
-
+  //}
   def put(s: String): Action[AnyContent] = Action {
 
     controller.befehl = s
@@ -52,5 +54,36 @@ class GameController @Inject() (cc:ControllerComponents) extends AbstractControl
     Ok(views.html.squarecastle("empfangen",supervisor))
     //views.html.squarecastle.apply("empfangen", s , supervisor.playersturn)
     //views.html.squarecastle.render("empfangen", s , supervisor.playersturn)
+  }
+
+  def JsonCommand = Action(parse.json) {
+    println("json received");
+    request: Request[JsValue] => {
+      val data = readCommand(request.body)
+      clicked(data._1, data._2)
+      Ok(toJson(supervisor))
+    }
+  }
+  def toJson(value: Any): String = {
+    val JacksMapper = new ObjectMapper() with ScalaObjectMapper
+    JacksMapper.writeValueAsString(value)
+  }
+  def SendController = Action(parse.json) {
+    Ok(toJson(supervisor))
+  }
+  def readCommand(value: JsValue): (String,String) ={
+
+    val x = (value\"x").get.toString.replace("\"", "");
+    val y = (value\"y").get.toString().replace("\"", "");
+    println("COMMAND: i "+x+" "+y)
+    (x,y)
+  }
+  def clicked(x:String,y:String): Unit ={
+    controller.befehl = ("i " + x + " " + y)
+    if(supervisor.newRoundactive() != 2){
+      supervisor.otherplayer()
+      supervisor.newRound()
+    }
+    //update website
   }
 }

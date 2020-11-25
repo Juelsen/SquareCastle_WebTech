@@ -21,3 +21,6 @@ unmanagedResourceDirectories in Test <+=  baseDirectory ( _ /"target/web/public/
 libraryDependencies += "com.typesafe.play" %% "play-json" % "2.6.6"
 
 libraryDependencies += "org.scala-lang.modules" %% "scala-xml" % "1.2.0"
+
+libraryDependencies += "com.fasterxml.jackson.core" % "jackson-databind" % "2.2.2"
+libraryDependencies += "com.fasterxml.jackson.module" %% "jackson-module-scala" % "2.2.2"
