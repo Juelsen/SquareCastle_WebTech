@@ -46,12 +46,12 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-12 col-lg-2 col-xl-3">
+            <div class="col-12 col-xl-3">
                 <div class="row">
-                    <div class="col-12 col-sm-6 col-lg-12">
+                    <div class="col-12 col-md-6 col-xl-12">
                         <div class="blue-player"></div>
                     </div>
-                    <div class="col-12 col-sm-6 col-lg-12">
+                    <div class="col-12 col-md-6 col-xl-12">
                         <div class="red-player"></div>
                     </div>
                 </div>
@@ -59,58 +59,57 @@
                 <p class="green-text">@supervisor.playersturn 's</p>
                 <p>turn!!</p>*@
             </div>
-            <div class="col-12 col-lg-10 col-xl-9">
+            <div class="col-12 col-xl-9">
                 <div class="row">
-                    <div class="col-lg-10 col-xl-8">
-                    @for(y <- 0 until 6) {
-                        <div class="row">
-                        @for(x <- 0 until 12) {
-                            <div id="@x @y" class="col-1 grid-hover">
-                                    <script>addclicklistener("@x @y")</script>
-                                    <img src=@routes.Assets.versioned(supervisor.controller.ImagePath(supervisor.map.field(x)(y), supervisor.card))>
-                            </div>
-                        }
-                        </div>
-                    }
+                    <div class="col-12 col-xl-8">
+                        <section class="mapWrapper">
+                            @for(y <- 0 until 6) {
+                                <div class="row">
+                                @for(x <- 0 until 12) {
+                                    <div id="@x @y" class="col-1 grid-hover">
+                                            <script>addclicklistener("@x @y")</script>
+                                            <img src=@routes.Assets.versioned(supervisor.controller.ImagePath(supervisor.map.field(x)(y), supervisor.card))>
+                                    </div>
+                                }
+                                </div>
+                            }
+                        </section>
                     </div>
-                    <div class="col-lg-2 col-xl-4">
-                        <div class="row">
-                            <div>
-                                <a href="">
-                                    <button type="button" class="btn btn-warning button-circle btn-md help-button">
-                                        HELP</button>
-                                </a>
-                            </div>
+                    <div class="col-6 col-xl-4">
+                        <div class="map">
+                            <img class="card-preview" src="@routes.Assets.versioned("images/cards/1221.png")">
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="col-4"></div>
-            <div class="col-4">
+            <div class="col-12">
                 <div class="toolbar">
                     <div class="row">
-                        <div class="col-4">
-                            <a href="">
-                                <button class="rotateLeft-button"></button>
-                            </a>
-                        </div>
-                        <div class="col-4">
-                            <a href="">
-                                <button class="pause-button"></button>
-                            </a>
-                        </div>
-                        <div class="col-4">
-                            <a href="">
-                                <button class="rotateRight-button"></button>
-                            </a>
+                        <div class="col-sm-1 col-md-2 col-lg-3 col-xl-4"></div>
+                        <div class="col-12 col-sm-11 col-md-10 col-lg-9 col-xl-8">
+                            <section class="wrapper">
+                                <div class="left-background">
+                                    <a href="">
+                                        <button class="toolbar-button"></button>
+                                    </a>
+                                </div>
+                                <div class="pause-background">
+                                    <a href="">
+                                        <button class="toolbar-button"></button>
+                                    </a>
+                                </div>
+                                <div class="right-background">
+                                    <a href="">
+                                        <button class="toolbar-button"></button>
+                                    </a>
+                                </div>
+                                <div class="round-background"></div>
+                            </section>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-4">
-
             </div>
         </div>
     </div>
