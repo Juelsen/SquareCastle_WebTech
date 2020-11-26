@@ -34,8 +34,8 @@ function sendRequest(meth, path, payload){
   });
 }
 function updateHTML(){
-  document.getElementById("5 5").innerHTML = "Kotbatzen"
-  for(let x = 0; x < 6; x++){
+  document.getElementById("5 5").innerHTML = "Codebatzen"
+  for(var x = 0; x < 6; x++){
     document.getElementById("")
 
   }
