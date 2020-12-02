@@ -5,12 +5,10 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.scala.ScalaObjectMapper
 import gamecontrol.supervisor.{SupervisorInterface, supervisor}
 import gamecontrol.controller.{Controller, ControllerInterface}
-import gamecontrol.{InsertedEvent, updateEvent}
-import gamemodel.model.MapInterface
 import javax.inject.Inject
 import play.api.mvc.{AbstractController, Action, AnyContent, ControllerComponents, Request, WebSocket}
 import play.api.i18n.I18nSupport
-import play.api.libs.json.{JsArray, JsPath, JsValue, Json, Writes}
+import play.api.libs.json.{JsArray, JsObject, JsPath, JsString, JsValue, Json, Writes}
 
 import scala.swing.Reactor
 
@@ -61,26 +59,50 @@ class GameController @Inject() (cc:ControllerComponents) extends AbstractControl
     request: Request[JsValue] => {
       val data = readCommand(request.body)
       clicked(data._1, data._2)
-      Ok(toJson(supervisor))
+      Ok(sendControllerOutput())
     }
   }
+
+  var Controllerstate = 0;
+  var layedX = -1;
+  var layedY = -1;
+  def sendControllerOutput(): JsValue ={
+    //eventuelle Ereignisse als int code
+    //'{ "name": "Georg", "alter": 47, "verheiratet": false, "beruf": null}'
+    val data = Array.ofDim[String](4)
+    data(0) = Controllerstate.toString
+    data(1) = supervisor.controller.ImagePath(supervisor.card, supervisor.card)
+    data(2) = supervisor.controller.ImagePath(supervisor.map.field(layedX)(layedY), supervisor.map.field(layedX)(layedY))
+    data(3) = supervisor.playersturn.toString
+    //val str = "'{ " + data(0) + "," + data(1) + "," + data(2) + "," + data(3) + " }'"
+
+
+    val jsonArray = Json.toJson(Seq(
+      toJson(data(0)), toJson(data(1)), toJson(data(2)), toJson(data(3))
+    ))
+    println(jsonArray)
+    jsonArray
+  }
+
   def toJson(value: Any): String = {
     val JacksMapper = new ObjectMapper() with ScalaObjectMapper
     JacksMapper.writeValueAsString(value)
   }
   def SendController = Action(parse.json) {
-    Ok(toJson(supervisor))
+    Ok(sendControllerOutput())
   }
   def readCommand(value: JsValue): (String,String) ={
-
     val x = (value\"x").get.toString.replace("\"", "");
     val y = (value\"y").get.toString().replace("\"", "");
+    layedX = x.toInt;
+    layedY = y.toInt;
     println("COMMAND: i "+x+" "+y)
     (x,y)
   }
   def clicked(x:String,y:String): Unit ={
     controller.befehl = ("i " + x + " " + y)
-    if(supervisor.newRoundactive() != 2){
+    Controllerstate = supervisor.newRoundactive()
+    if(Controllerstate != 2){
       supervisor.otherplayer()
       supervisor.newRound()
     }
