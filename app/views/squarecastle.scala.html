@@ -81,7 +81,7 @@
                     </div>
                     <div class="col-6 col-xl-4">
                         <div class="map" id="newcard">
-                            <img class="card-preview" src="@routes.Assets.versioned("images/cards/1221.png")">
+                            <img id="preview" class="card-preview" src="@routes.Assets.versioned(s)">
                         </div>
                     </div>
                 </div>
@@ -94,13 +94,13 @@
                         <div class="col-sm-1 col-md-2 col-lg-3 col-xl-4"></div>
                         <div class="col-12 col-sm-11 col-md-10 col-lg-9 col-xl-8">
                             <section class="wrapper">
-                                <div class="left-background">
+                                <div id="l" class="left-background">
                                     <button class="toolbar-button" instruction="l" onclick="calc(this);"></button>
                                 </div>
-                                <div class="pause-background">
+                                <div id="wait" class="pause-background">
                                     <button class="toolbar-button" instruction="wait" onclick="calc(this);"></button>
                                 </div>
-                                <div class="right-background">
+                                <div id="r" class="right-background">
                                     <button class="toolbar-button" instruction="r" onclick="calc(this);"></button>
                                 </div>
                                 <div class="round-background"></div>

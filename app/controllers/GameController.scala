@@ -41,7 +41,8 @@ class GameController @Inject() (cc:ControllerComponents) extends AbstractControl
     supervisor.testfall();
     supervisor.newRound()
 
-    Ok(views.html.squarecastle("STARTE SPIEL",supervisor))
+    Ok(views.html.squarecastle(supervisor.controller.ImagePath(supervisor.card, supervisor.card),supervisor))
+
   }
 
   def about(): Action[AnyContent] = Action {
@@ -55,7 +56,6 @@ class GameController @Inject() (cc:ControllerComponents) extends AbstractControl
   }
 
   def JsonCommand = Action(parse.json) {
-    println("json received");
     request: Request[JsValue] => {
       val data = readCommand(request.body)
       clicked(data)

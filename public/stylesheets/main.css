@@ -61,6 +61,8 @@ section.mapWrapper {
     position: relative;
     top: 24%;
     left: 33%;
+    transition-duration: 0.8s;
+    transition-property: transform;
 }
 
 .hint-button {
@@ -118,6 +120,7 @@ section.wrapper {
     height: 215px;
     width: 160px;
     float: left;
+
 }
 
 .right-background {
