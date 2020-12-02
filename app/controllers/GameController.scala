@@ -58,7 +58,7 @@ class GameController @Inject() (cc:ControllerComponents) extends AbstractControl
     println("json received");
     request: Request[JsValue] => {
       val data = readCommand(request.body)
-      clicked(data._1, data._2)
+      clicked(data)
       Ok(sendControllerOutput())
     }
   }
@@ -72,7 +72,9 @@ class GameController @Inject() (cc:ControllerComponents) extends AbstractControl
     val data = Array.ofDim[String](4)
     data(0) = Controllerstate.toString
     data(1) = supervisor.controller.ImagePath(supervisor.card, supervisor.card)
-    data(2) = supervisor.controller.ImagePath(supervisor.map.field(layedX)(layedY), supervisor.map.field(layedX)(layedY))
+    if(layedX != -1 && layedY != -1)
+      data(2) = supervisor.controller.ImagePath(supervisor.map.field(layedX)(layedY), supervisor.map.field(layedX)(layedY))
+
     data(3) = supervisor.playersturn.toString
     //val str = "'{ " + data(0) + "," + data(1) + "," + data(2) + "," + data(3) + " }'"
 
@@ -80,7 +82,6 @@ class GameController @Inject() (cc:ControllerComponents) extends AbstractControl
     val jsonArray = Json.toJson(Seq(
       toJson(data(0)), toJson(data(1)), toJson(data(2)), toJson(data(3))
     ))
-    println(jsonArray)
     jsonArray
   }
 
@@ -91,16 +92,20 @@ class GameController @Inject() (cc:ControllerComponents) extends AbstractControl
   def SendController = Action(parse.json) {
     Ok(sendControllerOutput())
   }
-  def readCommand(value: JsValue): (String,String) ={
-    val x = (value\"x").get.toString.replace("\"", "");
-    val y = (value\"y").get.toString().replace("\"", "");
-    layedX = x.toInt;
-    layedY = y.toInt;
-    println("COMMAND: i "+x+" "+y)
-    (x,y)
+  def readCommand(value: JsValue): (String) ={
+    val instruction = (value\"instruction").get.toString.replace("\"", "")
+    if(instruction == "0"){
+      val x = (value\"x").get.toString.replace("\"", "");
+      val y = (value\"y").get.toString().replace("\"", "");
+      layedX = x.toInt;
+      layedY = y.toInt;
+      return "i "+x+" "+y
+    }
+    instruction
   }
-  def clicked(x:String,y:String): Unit ={
-    controller.befehl = ("i " + x + " " + y)
+  def clicked(befehl:String): Unit ={
+    controller.befehl = befehl
+    println(befehl)
     Controllerstate = supervisor.newRoundactive()
     if(Controllerstate != 2){
       supervisor.otherplayer()

@@ -11,6 +11,7 @@ document.getElementsByTagName('head')[0].appendChild(script);
 function calc(source){
   console.log("click")
   var payload = {
+    "instruction": source.getAttribute("instruction"),
     "x": source.getAttribute("x"),
     "y": source.getAttribute("y")
   }
