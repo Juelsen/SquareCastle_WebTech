@@ -5,6 +5,7 @@
 # An example controller showing a sample home page
 GET     /                           controllers.GameController.about()
 GET     /home                       controllers.GameController.about()
+GET     /player-settings            controllers.GameController.playerSettings
 GET     /squarecastle               controllers.GameController.squarecastle
 GET     /squarecastle/:column       controllers.GameController.put(column:String)
 # Map static resources from the /public folder to the /assets URL path
