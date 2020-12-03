@@ -93,7 +93,7 @@ function animateImg(index){
 function endanimation(){
   lock = false;
   document.getElementById('animateImg'+animationindex).style.zIndex = "-999";
-  document.getElementById('animateImg'+animationindex).style.right = "100%";
+  document.getElementById('animateImg'+animationindex).style.right = 'calc(100% + 1200px)';
 
 
 }

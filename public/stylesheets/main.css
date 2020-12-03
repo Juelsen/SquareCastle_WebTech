@@ -160,7 +160,7 @@ section.wrapper {
 
 .transform {
     position:absolute;
-    right:calc(100%);
+    right:calc(100% + 1200px);
     transition: right 2s;
     -webkit-transition: right 2s;
     -moz-transition: right 2s;
