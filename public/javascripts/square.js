@@ -7,8 +7,9 @@ script.src = 'https://code.jquery.com/jquery-3.4.1.min.js';
 script.type = 'text/javascript';
 document.getElementsByTagName('head')[0].appendChild(script);
 
-
 function calc(source){
+  if(lock)
+    return
   var payload = {
     "instruction": source.getAttribute("instruction"),
     "x": source.getAttribute("x"),
@@ -65,8 +66,34 @@ function updateHTML(){
     }
   }
   else if(Data[0] === "1") {
+    turned = 0;
+    animateImg(0);
+
     console.log("new Picture");
     document.getElementById("newcard").innerHTML = '<img id="preview" class="card-preview" src="/assets/' + Data[1] + '">'
     document.getElementById(clickedX + " " + clickedY).innerHTML = '<img src="/assets/' + Data[2] + '">'
   }
+
+}
+function startgame(){
+  animateImg(0);
+}
+var animationindex = 0;
+var lock = false;
+function animateImg(index){
+  animationindex = index;
+  lock = true;
+  document.getElementById('animateImg'+index).style.zIndex = "99";
+  document.getElementById('animateImg'+index).style.right = "0";
+
+
+
+  setTimeout(endanimation, 2000);
+}
+function endanimation(){
+  lock = false;
+  document.getElementById('animateImg'+animationindex).style.zIndex = "-999";
+  document.getElementById('animateImg'+animationindex).style.right = "100%";
+
+
 }

@@ -40,9 +40,7 @@ class GameController @Inject() (cc:ControllerComponents) extends AbstractControl
   def squarecastle: Action[AnyContent] = Action{
     supervisor.testfall();
     supervisor.newRound()
-
     Ok(views.html.squarecastle(supervisor.controller.ImagePath(supervisor.card, supervisor.card),supervisor))
-
   }
 
   def about(): Action[AnyContent] = Action {
