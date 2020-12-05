@@ -43,8 +43,12 @@ class GameController @Inject() (cc:ControllerComponents) extends AbstractControl
     Ok(views.html.squarecastle(supervisor.controller.ImagePath(supervisor.card, supervisor.card),supervisor))
   }
 
-  def playerSettings: Action[AnyContent] = Action {
+  def playerSettings(): Action[AnyContent] = Action {
     Ok(views.html.playerSettings())
+  }
+
+  def rules(): Action[AnyContent] = Action {
+    Ok(views.html.rules())
   }
 
   def about(): Action[AnyContent] = Action {

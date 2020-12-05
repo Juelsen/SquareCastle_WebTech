@@ -18,7 +18,7 @@
 }
 .home-button {
     border-color: #000000;
-    border-width: 5px;
+    border-width: 3px;
     border-radius: 50%;
     float: right;
     height: 85px;
@@ -29,20 +29,21 @@
 
 
 
+
 /*-------------------------Mid-Row-----------------------------------*/
 .blue-player {
     margin: 0 auto;
     background: no-repeat center url(../images/banner-blau.png);
-    height: 300px;
-    width: 400px;
+    height: 235px;
+    width: 300px;
     background-size: 106%;
 }
 
 .red-player {
     margin: 0 auto;
     background: no-repeat center url(../images/banner-rot.png);
-    height: 300px;
-    width: 400px;
+    height: 235px;
+    width: 300px;
     background-size: 106%;
 }
 
@@ -103,22 +104,22 @@ section.mapWrapper {
 
 section.wrapper {
     max-width: 100%;
-    height: 400px;
+    height: 200px;
 }
 
 .left-background {
     background: no-repeat center url(../images/left.png);
     background-size: 100%;
-    height: 215px;
-    width: 160px;
+    height: 200px;
+    width: 120px;
     float: left;
 }
 
 .pause-background {
     background: no-repeat center url(../images/pause.png);
     background-size: 100%;
-    height: 215px;
-    width: 160px;
+    height: 200px;
+    width: 120px;
     float: left;
 
 }
@@ -126,8 +127,8 @@ section.wrapper {
 .right-background {
     background: no-repeat center url(../images/right.png);
     background-size: 100%;
-    height: 215px;
-    width: 160px;
+    height: 200px;
+    width: 120px;
     float: left;
 }
 
