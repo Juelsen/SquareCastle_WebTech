@@ -1,31 +1,6 @@
-body,
-ol,
-ul,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-th,
-td,
-dl,
-dd,
-form,
-fieldset,
-legend,
-input,
-textarea,
-i,
-select {
-    margin: 0;
-    padding: 0;
-}
-
-
-.background-img {
-
+body {
+    background: no-repeat center center fixed url(../images/background-wood.png);
+    background-size: cover;
 }
 
 .titleWhite  {
@@ -44,59 +19,28 @@ select {
     margin-top: 40px;
 }
 
-
-
-body {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    -webkit-perspective: 90rem;
-    perspective: 90rem;
-    -webkit-perspective-origin: 34% 61%;
-    perspective-origin: 34% 61%;
-    background: no-repeat center center fixed url(../images/background-wood.png);
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-}
-
 .coverIMG {
     width: 160px;
 }
 
 .playerButtons {
     cursor: pointer;
-    outline: 0;
     width: 180px;
     height: 48px;
     border-radius: 8px;
     margin-top: 40px;
     overflow: hidden;
     -webkit-transform: scale(.7);
-    transform: scale(.7);
 }
 
 .playerButtons::after {
-     content: "";
      position: relative;
-     top: -40px;
      display: block;
      width: 48px;
      height: 107%;
-     background-color: #000;
      margin-top: -1px;
      margin-left: -7px;
      border-radius: 6px 0 0 6px;
-     /* background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iMTRweCIgaGVpZ2h0PSIxN3B4IiB2aWV3Qm94PSIwIDAgMTQgMTciIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+CiAgICA8IS0tIEdlbmVyYXRvcjogU2tldGNoIDUxLjEgKDU3NTAxKSAtIGh0dHA6Ly93d3cuYm9oZW1pYW5jb2RpbmcuY29tL3NrZXRjaCAtLT4KICAgIDx0aXRsZT5TaGFwZTwvdGl0bGU+CiAgICA8ZGVzYz5DcmVhdGVkIHdpdGggU2tldGNoLjwvZGVzYz4KICAgIDxkZWZzPjwvZGVmcz4KICAgIDxnIGlkPSJQYWdlLTEiIHN0cm9rZT0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIiBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPgogICAgICAgIDxnIGlkPSJEZXNrdG9wLUhELUNvcHktMyIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTYwOS4wMDAwMDAsIC0xMDA4LjAwMDAwMCkiIGZpbGw9IiNGOUZDRkYiIGZpbGwtcnVsZT0ibm9uemVybyI+CiAgICAgICAgICAgIDxnIGlkPSJHcm91cC0xMSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNTQ3LjAwMDAwMCwgNDk5LjAwMDAwMCkiPgogICAgICAgICAgICAgICAgPGcgaWQ9Ikdyb3VwLTYtQ29weSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNDYuMDAwMDAwLCA0OTUuMDAwMDAwKSI+CiAgICAgICAgICAgICAgICAgICAgPGcgaWQ9ImljX2ZpbGVfZG93bmxvYWRfYmxhY2tfMjRweC0oMSkiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDE2LjAwMDAwMCwgOC4wMDAwMDApIj4KICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggZD0iTTE0LDEyIEwxMCwxMiBMMTAsNiBMNCw2IEw0LDEyIEwwLDEyIEw3LDE5IEwxNCwxMiBaIE0wLDIxIEwwLDIzIEwxNCwyMyBMMTQsMjEgTDAsMjEgWiIgaWQ9IlNoYXBlIj48L3BhdGg+CiAgICAgICAgICAgICAgICAgICAgPC9nPgogICAgICAgICAgICAgICAgPC9nPgogICAgICAgICAgICA8L2c+CiAgICAgICAgPC9nPgogICAgPC9nPgo8L3N2Zz4='); */
-     background-repeat: no-repeat;
-     background-position: center;
  }
 
 .playerButtons::before {
@@ -106,11 +50,11 @@ body {
     height: 46px;
     margin-left: -7px;
     margin-top: -1px;
+    /*Button smooth fill animation*/
     -webkit-transition: all 200ms cubic-bezier(0.25, 0.75, 0.5, 1.25);
-    transition: all 200ms cubic-bezier(0.25, 0.75, 0.5, 1.25);
 }
 
-/* Button slide/fill animation */
+/* Start --- Button fill color */
 .player-1:hover .playerButtons::before {
     width: 120%;
     background-color: #3a45b4;
@@ -123,55 +67,30 @@ body {
 
 .player-3:hover .playerButtons::before {
     width: 120%;
-    background-color: #3a45b4;
+    background-color: #336a5e;
 }
 
 .player-4:hover .playerButtons::before {
     width: 120%;
     background-color: #a62829;
 }
-
-.ownContainer {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    justify-content: space-around;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-    /* width: 80vw; */
-    height: 50vh;
-    margin-top: 20px;
-    /* transform:rotateX(7deg) rotateZ(-4deg) rotateY(13deg) scale3d(1, 1, -0.9);
-    -webkit-transform: rotateX(23deg) rotateZ(-9deg) rotateY(15deg) scale3d(1, 1, -0.9);
-    transform: rotateX(23deg) rotateZ(-9deg) rotateY(15deg) scale3d(1, 1, -0.9);*/
-}
+/* End --- Button fill color */
 
 .player {
-    display: -webkit-box;
-    display: -ms-flexbox;
+    margin: 80px 0;
     display: flex;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
     align-items: center;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    -webkit-transition: all .3s ease-out;
-    transition: all .3s ease-out;
-    will-change: transform;
+    flex-direction: column
 }
 
+/* Raise playercover */
 .player:hover .playerCover {
     -webkit-transform: translateY(-14px) scale(1.04);
     transform: translateY(-14px) scale(1.04);
 }
 
-.player-1 .playerButtons {
-    border: 1px solid #3a45b4;
+/* Start --- Buttons and size */
+.playerButtons {
     color: #fff;
     font-size: 22px;
     text-align: right;
@@ -179,78 +98,57 @@ body {
     line-height: 40px;
 }
 
+.player-1 .playerButtons {
+    border: 1px solid #3a45b4;
+}
+.player-2 .playerButtons {
+    border: 1px solid #a62829;
+}
+.player-3 .playerButtons {
+    border: 1px solid #336a5e;
+}
+.player-4 .playerButtons {
+    border: 1px solid #a62829;
+}
+/* End --- Buttons and size */
 
-/* Rechteck neben Namen */
+
+
+/* Start --- Rechteck neben Namen */
+.playerButtons::after {
+    top: -85px;
+    text-align: center;
+    font-weight: bolder;
+}
+
 .player-1 .playerButtons::after {
     content: "1";
     background-color: #0d1673;
-    top: -85px;
-    text-align: center;
-    font-weight: bolder;
 }
-
-.player-2 .playerButtons {
-    border: 1px solid #a62829;
-    color: #fff;
-    font-size: 22px;
-    text-align: right;
-    padding-right: 20px;
-    line-height: 40px;
-}
-
 .player-2 .playerButtons::after {
     content: "2";
     background-color: #741511;
-    top: -85px;
-    text-align: center;
-    font-weight: bolder;
 }
-
-.player-3 .playerButtons {
-    border: 1px solid #3a45b4;
-    color: #fff;
-    font-size: 22px;
-    text-align: right;
-    padding-right: 20px;
-    line-height: 40px;
-}
-
 .player-3 .playerButtons::after {
     content: "3";
-    background-color: #0d1673;
-    top: -85px;
-    text-align: center;
-    font-weight: bolder;
+    background-color: #1a3a32;
 }
-
-.player-4 .playerButtons {
-    border: 1px solid #a62829;
-    color: #fff;
-    font-size: 22px;
-    text-align: right;
-    padding-right: 20px;
-    line-height: 40px;
-}
-
 .player-4 .playerButtons::after {
     content: "4";
     background-color: #741511;
-    top: -85px;
-    text-align: center;
-    font-weight: bolder;
 }
+/* End --- Rechteck neben Namen */
+
 
 .playerCover {
     -webkit-transition: all 400ms ease-in-out;
-    transition: all 400ms ease-in-out;
-    will-change: transform;
 }
 
 .playerCover .coverIMG {
     -webkit-transition: all 260ms ease-in-out;
-    transition: all 260ms ease-in-out;
 }
 
+/*  */
 .player .playerCover::after {
     content: "";
     z-index: -99;
@@ -288,7 +186,7 @@ body {
 }
 
 .player-3 .playerCover::after {
-    background-image: url(../images/playerSettings-blau.png);
+    background-image: url(../images/playerSettings-green.png);
 }
 
 .player-4 .playerCover::after {
@@ -328,7 +226,7 @@ body {
     position: relative;
     top: -44px;
     left: 3px;
-    color: #3a45b4;
+    color: #1a3a32;
     font-size: 21px;
     font-weight: 300;
 }

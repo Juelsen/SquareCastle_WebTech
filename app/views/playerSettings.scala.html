@@ -6,7 +6,7 @@
     <link rel="stylesheet" href='@routes.Assets.versioned("stylesheets/playerSettings.css")' />
     <script src='@routes.Assets.versioned("javascripts/playButton.js")' type="application/javascript"></script>
 
-    <div class="container background-img">
+    <div class="container-fluid background-img">
         <div class="row">
             <div class="col-12">
                 @*<audio src="@routes.Assets.versioned("images/Soundtrack.mp3")" controls>
@@ -21,26 +21,34 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-12">
-                <div class="ownContainer">
-                    <div class="player player-1">
-                        <div class="playerCover"><img class="coverIMG" src="@routes.Assets.versioned("images/playerSettings-blau.png")"></div>
-                        <button class="playerButtons"><div class="buttonDIV buttonDIV-active1"></div></button>
-                    </div>
-                    <div class="player player-2">
-                        <div class="playerCover"><img class="coverIMG" src="@routes.Assets.versioned("images/playerSettings-rot.png")"></div>
-                        <button class="playerButtons"><div class="buttonDIV"></div></button>
-                    </div>
-                    <div class="player player-3">
-                        <div class="playerCover"><img class="coverIMG" src="@routes.Assets.versioned("images/playerSettings-blau.png")"></div>
-                        <button class="playerButtons"><div class="buttonDIV"></div></button>
-                    </div>
-                    <div class="player player-4">
-                        <div class="playerCover"><img class="coverIMG" src="@routes.Assets.versioned("images/playerSettings-rot.png")"></div>
-                        <button class="playerButtons"><div class="buttonDIV"></div></button>
-                    </div>
+            <div class="col-lg-2"></div>
+            <div class="col-6 col-lg-2">
+                <div class="player player-1">
+                    <div class="playerCover"><img class="coverIMG" src="@routes.Assets.versioned("images/playerSettings-blau.png")"></div>
+                    <button class="playerButtons"><div class="buttonDIV buttonDIV-active1"></div></button>
                 </div>
             </div>
+            <div class="col-6 col-lg-2">
+                <div class="player player-2">
+                    <div class="playerCover"><img class="coverIMG" src="@routes.Assets.versioned("images/playerSettings-rot.png")"></div>
+                    <button class="playerButtons"><div class="buttonDIV"></div></button>
+                </div>
+            </div>
+            <div class="col-6 col-lg-2">
+                <div class="player player-3">
+                    <div class="playerCover"><img class="coverIMG" src="@routes.Assets.versioned("images/playerSettings-green.png")"></div>
+                    <button class="playerButtons"><div class="buttonDIV"></div></button>
+                </div>
+            </div>
+            <div class="col-6 col-lg-2">
+                <div class="player player-4">
+                    <div class="playerCover"><img class="coverIMG" src="@routes.Assets.versioned("images/playerSettings-rot.png")"></div>
+                    <button class="playerButtons"><div class="buttonDIV"></div></button>
+                </div>
+            </div>
+            <div class="col-lg-2"></div>
+
+
         </div>
         <div class="row">
             <div class="col-12">
