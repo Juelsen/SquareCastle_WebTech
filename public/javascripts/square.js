@@ -68,7 +68,7 @@ function updateHTML(){
   }
   else if(Data[0] === "1") {
     turned = 0;
-    animateImg(0);
+    //animateImg(0);
     console.log("new Picture");
     document.getElementById("newcard").innerHTML = '<img id="preview" class="card-preview" src="/assets/' + Data[1] + '">'
     document.getElementById(clickedX + " " + clickedY).innerHTML = '<img src="/assets/' + Data[2] + '">'
@@ -76,7 +76,7 @@ function updateHTML(){
 
 }
 function startgame(){
-  animateImg(0);
+  //animateImg(0);
 }
 var animationindex = 0;
 var lock = false;

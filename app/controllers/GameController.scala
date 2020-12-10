@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.scala.ScalaObjectMapper
 import gamecontrol.supervisor.{SupervisorInterface, supervisor}
 import gamecontrol.controller.{Controller, ControllerInterface}
+import gamemodel.model.PlayerComponent.Player
+
 import javax.inject.Inject
 import play.api.mvc.{AbstractController, Action, AnyContent, ControllerComponents, Request, WebSocket}
 import play.api.i18n.I18nSupport
@@ -64,7 +66,8 @@ class GameController @Inject() (cc:ControllerComponents) extends AbstractControl
   def JsonCommand = Action(parse.json) {
     request: Request[JsValue] => {
       val data = readCommand(request.body)
-      clicked(data)
+      if(data != "init")
+        clicked(data)
       Ok(sendControllerOutput())
     }
   }
@@ -83,9 +86,6 @@ class GameController @Inject() (cc:ControllerComponents) extends AbstractControl
     data(3) = supervisor.playersturn.toString
     data(4) = supervisor.p1.getPoints().toString
     data(5) = supervisor.p2.getPoints().toString
-
-    //val str = "'{ " + data(0) + "," + data(1) + "," + data(2) + "," + data(3) + " }'"
-
 
     val jsonArray = Json.toJson(Seq(
       toJson(data(0)), toJson(data(1)), toJson(data(2)), toJson(data(3)),toJson(data(4)),toJson(data(5))
@@ -108,6 +108,25 @@ class GameController @Inject() (cc:ControllerComponents) extends AbstractControl
       layedX = x.toInt;
       layedY = y.toInt;
       return "i "+x+" "+y
+    }
+    if(instruction == "setPlayers"){
+      val player1 = (value\"x").get.toString.replace("\"", "")
+      val player2 = (value\"y").get.toString.replace("\"", "")
+      player1 match {
+        case "0" => supervisor.p1 = new Player("Sir Gaheris")
+        case "1" => supervisor.p1 = new Player("Sir Bedivere")
+        case "2" => supervisor.p1 = new Player("Sir Gareth")
+        case "3" => supervisor.p1 = new Player("Sir Bors")
+        case _ => supervisor.p1 = new Player("Sir Bors")
+      }
+      player2 match {
+        case "0" => supervisor.p2 = new Player("Sir Gaheris")
+        case "1" => supervisor.p2 = new Player("Sir Bedivere")
+        case "2" => supervisor.p2 = new Player("Sir Gareth")
+        case "3" => supervisor.p2 = new Player("Sir Bors")
+        case _ => supervisor.p2 = new Player("Sir Bors")
+      }
+      return "init"
     }
     instruction
   }
