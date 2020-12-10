@@ -83,7 +83,8 @@ class GameController @Inject() (cc:ControllerComponents) extends AbstractControl
     data(1) = supervisor.controller.ImagePath(supervisor.card, supervisor.card)
     if(layedX != -1 && layedY != -1)
       data(2) = supervisor.controller.ImagePath(supervisor.map.field(layedX)(layedY), supervisor.map.field(layedX)(layedY))
-    data(3) = supervisor.playersturn.toString
+    if(supervisor.playersturn != null)
+      data(3) = supervisor.playersturn.toString
     data(4) = supervisor.p1.getPoints().toString
     data(5) = supervisor.p2.getPoints().toString
 
@@ -126,6 +127,7 @@ class GameController @Inject() (cc:ControllerComponents) extends AbstractControl
         case "3" => supervisor.p2 = new Player("Sir Bors")
         case _ => supervisor.p2 = new Player("Sir Bors")
       }
+      println("spieler1 : " + supervisor.p1 + " spieler2 : "+supervisor.p2)
       return "init"
     }
     instruction

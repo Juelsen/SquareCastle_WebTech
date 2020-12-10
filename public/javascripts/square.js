@@ -63,7 +63,7 @@ function updateHTML(){
       case "wait":
         break;
       default:
-        console.log("Instruction not readable");
+        console.log("Instruction not readable "+ instruction);
     }
   }
   else if(Data[0] === "1") {
