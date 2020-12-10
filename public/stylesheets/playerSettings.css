@@ -34,14 +34,14 @@ body {
 }
 
 .playerButtons::after {
-     position: relative;
-     display: block;
-     width: 48px;
-     height: 107%;
-     margin-top: -1px;
-     margin-left: -7px;
-     border-radius: 6px 0 0 6px;
- }
+    position: relative;
+    display: block;
+    width: 48px;
+    height: 107%;
+    margin-top: -1px;
+    margin-left: -7px;
+    border-radius: 6px 0 0 6px;
+}
 
 .playerButtons::before {
     content: "";

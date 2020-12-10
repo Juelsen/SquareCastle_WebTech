@@ -1,0 +1,359 @@
+
+@bluePlayer: #3a45b4;
+@redPlayer: #a62829;
+@greenPlayer: #336a5e;
+@purplePlayer: #ffffff;
+
+@bluePlayerDark: #0d1673;
+@redPlayerDark: #741511;
+@greenPlayerDark: #1a3a32;
+@purplePlayerDark: #ffffff;
+
+body {
+  background: no-repeat center center fixed url(../public/images/background-wood.png);
+  background-size: cover;
+}
+
+.titleWhite  {
+  width: 600px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
+}
+
+.selectPlayers  {
+  width: 400px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 40px;
+}
+
+.coverIMG {
+  width: 160px;
+}
+
+.playerButtons {
+  cursor: pointer;
+  width: 180px;
+  height: 48px;
+  border-radius: 8px;
+  margin-top: 40px;
+  overflow: hidden;
+  -webkit-transform: scale(.7);
+}
+
+.playerButtons::after {
+  position: relative;
+  display: block;
+  width: 48px;
+  height: 107%;
+  margin-top: -1px;
+  margin-left: -7px;
+  border-radius: 6px 0 0 6px;
+}
+
+.playerButtons::before {
+  content: "";
+  display: block;
+  width: 48px;
+  height: 46px;
+  margin-left: -7px;
+  margin-top: -1px;
+  /*Button smooth fill animation*/
+  -webkit-transition: all 200ms cubic-bezier(0.25, 0.75, 0.5, 1.25);
+}
+
+/* Start --- Button fill color */
+.player-1:hover {
+
+  .playerButtons::before {
+    width: 120%;
+    background-color: @bluePlayer;
+  }
+
+  .playerButtons::before {
+    width: 120%;
+    background-color: @redPlayer;
+  }
+
+  .playerButtons::before {
+    width: 120%;
+    background-color: @greenPlayer;
+  }
+
+  .playerButtons::before {
+    width: 120%;
+    background-color: @purplePlayer;
+  }
+}
+/* End --- Button fill color */
+
+.player {
+  margin: 80px 0;
+  display: flex;
+  align-items: center;
+  flex-direction: column
+}
+
+/* Raise playercover */
+.player:hover .playerCover {
+  -webkit-transform: translateY(-14px) scale(1.04);
+  transform: translateY(-14px) scale(1.04);
+}
+
+/* Start --- Buttons and size */
+.playerButtons {
+  color: #fff;
+  font-size: 22px;
+  text-align: right;
+  padding-right: 20px;
+  line-height: 40px;
+}
+
+.player-1 .playerButtons {
+  border: 1px solid @bluePlayer;
+}
+.player-2 .playerButtons {
+  border: 1px solid @redPlayer;
+}
+.player-3 .playerButtons {
+  border: 1px solid @greenPlayer;
+}
+.player-4 .playerButtons {
+  border: 1px solid @purplePlayer;
+}
+/* End --- Buttons and size */
+
+
+
+/* Start --- Rechteck neben Namen */
+.playerButtons::after {
+  top: -85px;
+  text-align: center;
+  font-weight: bolder;
+}
+
+.player-1 .playerButtons::after {
+  content: "1";
+  background-color: @bluePlayerDark;
+}
+.player-2 .playerButtons::after {
+  content: "2";
+  background-color: @redPlayerDark;
+}
+.player-3 .playerButtons::after {
+  content: "3";
+  background-color: @greenPlayerDark;
+}
+.player-4 .playerButtons::after {
+  content: "4";
+  background-color: @purplePlayerDark;
+}
+/* End --- Rechteck neben Namen */
+
+
+.playerCover {
+  -webkit-transition: all 400ms ease-in-out;
+}
+
+.playerCover .coverIMG {
+  -webkit-transition: all 260ms ease-in-out;
+}
+
+/* Backlight für playercover */
+.player .playerCover::after {
+  content: "";
+  z-index: -99;
+  position: absolute;
+  top: 20px;
+  left: -20px;
+  display: block;
+  width: 160px;
+  height: 214px;
+  background-position: center;
+  background-repeat: no-repeat;
+  /* Größe für backlight */
+  background-size: 160px 214px;
+  -webkit-filter: blur(24px);
+  filter: blur(24px);
+  -webkit-transition: all 260ms ease-in-out;
+  transition: all 260ms ease-in-out;
+  will-change: transform;
+  -webkit-transform: scale(.6);
+  transform: scale(.6);
+}
+
+.player:hover .playerCover::after {
+  opacity: 1;
+  -webkit-transform: scale(1);
+  transform: scale(1);
+}
+
+.player-1 .playerCover::after {
+  background-image: url(../public/images/playerSettings-blau.png);
+}
+
+.player-2 .playerCover::after {
+  background-image: url(../public/images/playerSettings-rot.png);
+}
+
+.player-3 .playerCover::after {
+  background-image: url(../public/images/playerSettings-green.png);
+}
+
+.player-4 .playerCover::after {
+  background-image: url(../public/images/playerSettings-rot.png);
+}
+
+.player-1 .playerButtons .buttonDIV::before {
+  content: 'Sir Gaheris';
+  position: relative;
+  top: -44px;
+  left: 4px;
+  color: @bluePlayer;
+  font-size: 21px;
+  font-weight: 300;
+}
+
+.player-1:hover .playerButtons .buttonDIV::before {
+  color: #fff;
+}
+
+.player-2 .playerButtons .buttonDIV::before {
+  content: 'Sir Bedivere';
+  position: relative;
+  top: -44px;
+  left: 9px;
+  color: @redPlayer;
+  font-size: 21px;
+  font-weight: 300;
+}
+
+.player-2:hover .playerButtons .buttonDIV::before {
+  color: #fff;
+}
+
+.player-3 .playerButtons .buttonDIV::before {
+  content: 'Sir Gareth';
+  position: relative;
+  top: -44px;
+  left: 3px;
+  color: @greenPlayer;
+  font-size: 21px;
+  font-weight: 300;
+}
+
+.player-3:hover .playerButtons .buttonDIV::before {
+  color: #fff;
+}
+
+.player-4 .playerButtons .buttonDIV::before {
+  content: 'Sir Bors';
+  position: relative;
+  top: -44px;
+  left: -9px;
+  color: @purplePlayer;
+  font-size: 21px;
+  font-weight: 300;
+}
+
+.player-4:hover .playerButtons .buttonDIV::before {
+  color: #fff;
+}
+
+
+
+
+
+
+
+
+.playerCoverActive {
+  -webkit-transform: translateY(-14px) scale(1.04);
+  transform: translateY(-14px) scale(1.04);
+  content: "";
+  z-index: -99;
+  position: absolute;
+  top: 20px;
+  left: -20px;
+  display: block;
+  width: 160px;
+  height: 214px;
+  background-position: center;
+  background-repeat: no-repeat;
+  /* Größe für backlight */
+  background-size: 160px 214px;
+  -webkit-filter: blur(24px);
+  filter: blur(24px);
+}
+
+
+
+
+
+
+
+
+
+
+.start-button {
+  border-color: #000000;
+  border-width: 5px;
+  border-radius: 10px;
+  height: 85px;
+  width: 250px;
+  background: no-repeat center #ffffff url(../public/images/start.png);
+  background-size: 200px;
+}
+
+
+.btn {
+  position: relative;
+  color: rgba(255, 255, 255, 1);
+  font-weight: bold;
+  font-size: 3em;
+  text-decoration: none;
+  display: block;
+  padding: 4px;
+  border-radius: 8px;
+  box-shadow: 0 9px 0 rgba(150, 150, 150, 1),0px 9px 25px rgba(0, 0, 0, .9);
+  float: left;
+}
+
+.start-btn {
+  btn()
+  background: no-repeat center #ffffff url(../public/images/start.png);
+  background-size: 200px;
+  height: 85px;
+  width: 250px;
+
+}
+.start-btn:active {
+  box-shadow: 0 3px 0 rgba(150, 150, 150, 1),0px 3px 6px rgba(0, 0, 0, .9);
+  position: relative;
+  top: 6px;
+}
+
+.home-btn {
+  btn()
+  background: no-repeat center #ffffff url(../public/images/back.png);
+  background-size: 50px;
+  height: 45px;
+  width: 125px;
+  margin: 40px 0px 0px 5px;
+}
+
+.home-btn:active {
+  box-shadow: 0 3px 0 rgba(150, 150, 150, 1),0px 3px 6px rgba(0, 0, 0, .9);
+  position: relative;
+  top: 6px;
+}
+
+.centered-buttons {
+  position: relative;
+  left: 40%;
+  width: 100%;
+  height: 100%;
+}
