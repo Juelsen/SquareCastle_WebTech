@@ -39,6 +39,8 @@ function readJson(json){
   Data[1] = json[1].replaceAll('"',"");
   Data[2] = json[2].replaceAll('"',"");
   Data[3] = json[3].replaceAll('"',"");
+  Data[4] = json[3].replaceAll('"',"");
+  Data[5] = json[3].replaceAll('"',"");
 
   updateHTML()
 }
@@ -59,7 +61,6 @@ function updateHTML(){
         document.getElementById("preview").style.transform = 'rotate('+turned+'deg)';
         break;
       case "wait":
-
         break;
       default:
         console.log("Instruction not readable");
@@ -68,7 +69,6 @@ function updateHTML(){
   else if(Data[0] === "1") {
     turned = 0;
     animateImg(0);
-
     console.log("new Picture");
     document.getElementById("newcard").innerHTML = '<img id="preview" class="card-preview" src="/assets/' + Data[1] + '">'
     document.getElementById(clickedX + " " + clickedY).innerHTML = '<img src="/assets/' + Data[2] + '">'
@@ -83,17 +83,18 @@ var lock = false;
 function animateImg(index){
   animationindex = index;
   lock = true;
-  document.getElementById('animateImg'+index).style.zIndex = "99";
-  document.getElementById('animateImg'+index).style.right = "0";
-
-
-
+  document.getElementById('animateImg'+animationindex).style.transition = "right 2s";
+  document.getElementById('animateImg'+index).style.transitionTimingFunction = "cubic-bezier(1,.55,.95,1.22)"
+  document.getElementById('animateImg'+index).style.right = 'calc(50%)'
   setTimeout(endanimation, 2000);
 }
 function endanimation(){
   lock = false;
-  document.getElementById('animateImg'+animationindex).style.zIndex = "-999";
-  document.getElementById('animateImg'+animationindex).style.right = 'calc(100% + 1200px)';
+  setTimeout(easeout, 500);
 
+}
+function easeout(){
+  document.getElementById('animateImg'+animationindex).style.transition = "right 0.75s";
+  document.getElementById('animateImg'+animationindex).style.right = 'calc(100% + 1200px)';
 
 }

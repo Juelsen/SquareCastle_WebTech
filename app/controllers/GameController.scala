@@ -75,18 +75,20 @@ class GameController @Inject() (cc:ControllerComponents) extends AbstractControl
   def sendControllerOutput(): JsValue ={
     //eventuelle Ereignisse als int code
     //'{ "name": "Georg", "alter": 47, "verheiratet": false, "beruf": null}'
-    val data = Array.ofDim[String](4)
+    val data = Array.ofDim[String](6)
     data(0) = Controllerstate.toString
     data(1) = supervisor.controller.ImagePath(supervisor.card, supervisor.card)
     if(layedX != -1 && layedY != -1)
       data(2) = supervisor.controller.ImagePath(supervisor.map.field(layedX)(layedY), supervisor.map.field(layedX)(layedY))
-
     data(3) = supervisor.playersturn.toString
+    data(4) = supervisor.p1.getPoints().toString
+    data(5) = supervisor.p2.getPoints().toString
+
     //val str = "'{ " + data(0) + "," + data(1) + "," + data(2) + "," + data(3) + " }'"
 
 
     val jsonArray = Json.toJson(Seq(
-      toJson(data(0)), toJson(data(1)), toJson(data(2)), toJson(data(3))
+      toJson(data(0)), toJson(data(1)), toJson(data(2)), toJson(data(3)),toJson(data(4)),toJson(data(5))
     ))
     jsonArray
   }
