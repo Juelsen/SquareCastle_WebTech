@@ -6,20 +6,15 @@ btnpressed[3] = false;
 
 $(document).ready(function () {
     $('#btnP1').click(function() {
-        console.log("clickedb1");
         btnpressed[0] = !btnpressed[0];
     });
     $('#btnP2').click(function() {
-        console.log("clickedb2");
         btnpressed[1] = !btnpressed[1];
     });
     $('#btnP3').click(function() {
-        console.log("clickedb3");
         btnpressed[2] = !btnpressed[2];
     });
     $('#btnP4').click(function() {
-        console.log("clickedb4");
-
         btnpressed[3] = !btnpressed[3];
     });
 
@@ -36,6 +31,7 @@ $(document).ready(function () {
                 "y": indices[1]
             }
             sendRequest("POST","/squarecastle/api/command", payload)
+            location = "/squarecastle";
         } else if(btnpressed.filter(Boolean).length === 1){
             alert("Du hast nur einen spieler ausgewählt!");
         } else {
