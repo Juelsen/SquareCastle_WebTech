@@ -31,7 +31,9 @@ $(document).ready(function () {
                 "y": indices[1]
             }
             sendRequest("POST","/squarecastle/api/command", payload)
-            location = "/squarecastle";
+            setTimeout(function () {
+                location = "/squarecastle";
+            },1000);
         } else if(btnpressed.filter(Boolean).length === 1){
             alert("Du hast nur einen spieler ausgewählt!");
         } else {

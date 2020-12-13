@@ -1,6 +1,7 @@
 package controllers
 
-import aview.TUI.{TUI, TUIInterface}
+import akka.actor.Props
+//import controllers.WebSockets.SquarecastleWebsocketactor
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.scala.ScalaObjectMapper
 import gamecontrol.supervisor.{SupervisorInterface, supervisor}
@@ -11,6 +12,7 @@ import javax.inject.Inject
 import play.api.mvc.{AbstractController, Action, AnyContent, ControllerComponents, Request, WebSocket}
 import play.api.i18n.I18nSupport
 import play.api.libs.json.{JsArray, JsObject, JsPath, JsString, JsValue, Json, Writes}
+import play.api.libs.streams.ActorFlow
 
 import scala.swing.Reactor
 
@@ -85,8 +87,10 @@ class GameController @Inject() (cc:ControllerComponents) extends AbstractControl
       data(2) = supervisor.controller.ImagePath(supervisor.map.field(layedX)(layedY), supervisor.map.field(layedX)(layedY))
     if(supervisor.playersturn != null)
       data(3) = supervisor.playersturn.toString
-    data(4) = supervisor.p1.getPoints().toString
-    data(5) = supervisor.p2.getPoints().toString
+    if(supervisor.p1 != null)
+      data(4) = supervisor.p1.getPoints().toString
+    if(supervisor.p2 != null)
+      data(5) = supervisor.p2.getPoints().toString
 
     val jsonArray = Json.toJson(Seq(
       toJson(data(0)), toJson(data(1)), toJson(data(2)), toJson(data(3)),toJson(data(4)),toJson(data(5))
@@ -142,4 +146,9 @@ class GameController @Inject() (cc:ControllerComponents) extends AbstractControl
     }
     //update website
   }
+  /*def socket = WebSocket.accept[JsValue, JsValue] { request =>
+    ActorFlow.actorRef { out =>
+      Props(SquarecastleWebsocketactor(out, supervisor))
+    }
+  }*/
 }

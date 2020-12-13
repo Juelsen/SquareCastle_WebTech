@@ -7,6 +7,12 @@ script.src = 'https://code.jquery.com/jquery-3.4.1.min.js';
 script.type = 'text/javascript';
 document.getElementsByTagName('head')[0].appendChild(script);
 
+
+$(document).ready(function() {
+  connectWebSocket();
+});
+var websocket = new WebSocket("ws://localhost:9000/websocket");
+
 function calc(source){
   if(lock)
     return
@@ -18,6 +24,7 @@ function calc(source){
   clickedX = source.getAttribute("x");
   clickedY = source.getAttribute("y");
   instruction = source.getAttribute("instruction");
+  //websocket.send(JSON.stringify(payload))
   sendRequest("POST","/squarecastle/api/command", payload)
 }
 
@@ -97,4 +104,30 @@ function easeout(){
   document.getElementById('animateImg'+animationindex).style.transition = "right 0.75s";
   document.getElementById('animateImg'+animationindex).style.right = 'calc(100% + 1200px)';
 
+}
+function connectWebSocket() {
+  console.log("Connecting to Websocket");
+  console.log("Connected to Websocket");
+
+  websocket.onopen = function(event) {
+    console.log("Trying to connect to Server");
+  }
+
+  websocket.onclose = function () {
+    console.log('Connection Closed!');
+    //$(".game").addClass("blurred");
+  };
+
+  websocket.onerror = function (error) {
+    console.log('Error Occured: ' + error);
+  };
+
+  /**
+   * Event when message is received from websocket
+   * Updates the game
+   * @param {*} e : received event
+   */
+  websocket.onmessage = function (e) {
+
+    }
 }
