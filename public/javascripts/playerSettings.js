@@ -17,7 +17,6 @@ $(document).ready(function () {
     $('#btnP4').click(function() {
         btnpressed[3] = !btnpressed[3];
     });
-
     $('#startGame').click(function() {
         if(btnpressed.filter(Boolean).length === 2){
             const indices = btnpressed.reduce(
@@ -29,7 +28,7 @@ $(document).ready(function () {
                 "instruction": "setPlayers",
                 "x": indices[0],
                 "y": indices[1]
-            }
+            };
             sendRequest("POST","/squarecastle/api/command", payload)
             setTimeout(function () {
                 location = "/squarecastle";
@@ -40,5 +39,4 @@ $(document).ready(function () {
             alert("Du hast noch keinen spieler ausgewählt!");
         }
     })
-
 });
