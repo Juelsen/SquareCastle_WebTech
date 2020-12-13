@@ -55,22 +55,22 @@ body {
 }
 
 /* Start --- Button fill color */
-.player-1:hover .playerButtons::before {
+.bluePlayer:hover .playerButtons::before {
     width: 120%;
     background-color: #3a45b4;
 }
 
-.player-2:hover .playerButtons::before {
+.redPlayer:hover .playerButtons::before {
     width: 120%;
     background-color: #a62829;
 }
 
-.player-3:hover .playerButtons::before {
+.greenPlayer:hover .playerButtons::before {
     width: 120%;
     background-color: #336a5e;
 }
 
-.player-4:hover .playerButtons::before {
+.purplePlayer:hover .playerButtons::before {
     width: 120%;
     background-color: #a62829;
 }
@@ -98,16 +98,16 @@ body {
     line-height: 40px;
 }
 
-.player-1 .playerButtons {
+.bluePlayer .playerButtons {
     border: 1px solid #3a45b4;
 }
-.player-2 .playerButtons {
+.redPlayer .playerButtons {
     border: 1px solid #a62829;
 }
-.player-3 .playerButtons {
+.greenPlayer .playerButtons {
     border: 1px solid #336a5e;
 }
-.player-4 .playerButtons {
+.purplePlayer .playerButtons {
     border: 1px solid #a62829;
 }
 /* End --- Buttons and size */
@@ -121,19 +121,19 @@ body {
     font-weight: bolder;
 }
 
-.player-1 .playerButtons::after {
+.bluePlayer .playerButtons::after {
     content: "1";
     background-color: #0d1673;
 }
-.player-2 .playerButtons::after {
+.redPlayer .playerButtons::after {
     content: "2";
     background-color: #741511;
 }
-.player-3 .playerButtons::after {
+.greenPlayer .playerButtons::after {
     content: "3";
     background-color: #1a3a32;
 }
-.player-4 .playerButtons::after {
+.purplePlayer .playerButtons::after {
     content: "4";
     background-color: #741511;
 }
@@ -177,23 +177,23 @@ body {
     transform: scale(1);
 }
 
-.player-1 .playerCover::after {
+.bluePlayer .playerCover::after {
     background-image: url(../images/playerSettings-blau.png);
 }
 
-.player-2 .playerCover::after {
+.redPlayer .playerCover::after {
     background-image: url(../images/playerSettings-rot.png);
 }
 
-.player-3 .playerCover::after {
+.greenPlayer .playerCover::after {
     background-image: url(../images/playerSettings-green.png);
 }
 
-.player-4 .playerCover::after {
+.purplePlayer .playerCover::after {
     background-image: url(../images/playerSettings-rot.png);
 }
 
-.player-1 .playerButtons .buttonDIV::before {
+.bluePlayer .playerButtons .buttonDIV::before {
     content: 'Sir Gaheris';
     position: relative;
     top: -44px;
@@ -203,11 +203,11 @@ body {
     font-weight: 300;
 }
 
-.player-1:hover .playerButtons .buttonDIV::before {
+.bluePlayer:hover .playerButtons .buttonDIV::before {
     color: #fff;
 }
 
-.player-2 .playerButtons .buttonDIV::before {
+.redPlayer .playerButtons .buttonDIV::before {
     content: 'Sir Bedivere';
     position: relative;
     top: -44px;
@@ -217,11 +217,11 @@ body {
     font-weight: 300;
 }
 
-.player-2:hover .playerButtons .buttonDIV::before {
+.redPlayer:hover .playerButtons .buttonDIV::before {
     color: #fff;
 }
 
-.player-3 .playerButtons .buttonDIV::before {
+.greenPlayer .playerButtons .buttonDIV::before {
     content: 'Sir Gareth';
     position: relative;
     top: -44px;
@@ -231,11 +231,11 @@ body {
     font-weight: 300;
 }
 
-.player-3:hover .playerButtons .buttonDIV::before {
+.greenPlayer:hover .playerButtons .buttonDIV::before {
     color: #fff;
 }
 
-.player-4 .playerButtons .buttonDIV::before {
+.purplePlayer .playerButtons .buttonDIV::before {
     content: 'Sir Bors';
     position: relative;
     top: -44px;
@@ -245,7 +245,7 @@ body {
     font-weight: 300;
 }
 
-.player-4:hover .playerButtons .buttonDIV::before {
+.purplePlayer:hover .playerButtons .buttonDIV::before {
     color: #fff;
 }
 

@@ -1,0 +1,83 @@
+/*---------------------------------Images---------------------------------*/
+
+@woodBackground: url("/assets/images/backgrounds/background-wood.png");
+@mapBackground: url("/assets/images/backgrounds/mapBackground.png");
+@papyrusBackground: url("/assets/images/backgrounds/papyrus.png");
+
+@castleIcon: url("/assets/images/castle.png");
+
+/* Button Icons */
+@startGameIcon: url("/assets/images/buttons/start.png");
+@backIcon: url("/assets/images/buttons/back.png");
+@rulesIcon: url("/assets/images/buttons/rules.png");
+@hintIcon: url("/assets/images/buttons/hint.png");
+
+/* Toolbar */
+@rightIcon: url("/assets/images/shields/right.png");
+@leftIcon: url("/assets/images/shields/left.png");
+@pauseIcon: url("/assets/images/shields/pause.png");
+
+@cardPreviewBackground: url("/assets/images/shields/cardPreview.png");
+
+/* Player Cover */
+@bluePlayerCover: url("/assets/images/players/player-blue.png");
+@redPlayerCover: url("/assets/images/players/player-red.png");
+@greenPlayerCover: url("/assets/images/players/player-green.png");
+@purplePlayerCover: url("/assets/images/players/player-purple.png");
+
+/* Player Banner */
+@bluePlayerBanner: url("/assets/images/players/banner-blue.png");
+@redPlayerBanner: url("/assets/images/players/banner-red.png");
+@greenPlayerBanner: url("/assets/images/players/banner-green.png");
+@purplePlayerBanner: url("/assets/images/players/banner-purple.png");
+
+
+/*------------------------------------Color-------------------------------*/
+
+@bluePlayerColor: #3a45b4;
+@redPlayerColor: #a62829;
+@greenPlayerColor: #336a5e;
+@purplePlayerColor: #ffffff;
+
+@bluePlayerColorDark: #0d1673;
+@redPlayerColorDark: #741511;
+@greenPlayerColorDark: #1a3a32;
+@purplePlayerColorDark: #ffffff;
+
+/*----------------------------------Prototypes----------------------------*/
+
+/*html, body {
+  background: no-repeat center center fixed @woodBackground;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}*/
+
+/* Wood Background */
+.background-img {
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+/* Buttons */
+.btn {
+  position: relative;
+  color: rgba(255, 255, 255, 1);
+  //font-weight: bold;
+  //font-size: 3em;
+  //text-decoration: none;
+  display: block;
+  padding: 4px;
+  border-radius: 8px;
+  box-shadow: 0 9px 0 rgba(150, 150, 150, 1),0 9px 25px rgba(0, 0, 0, .9);
+  float: left;
+}
+
+.btn-active {
+  box-shadow: 0 3px 0 rgba(150, 150, 150, 1),0 3px 6px rgba(0, 0, 0, .9);
+  position: relative;
+  top: 6px;
+}
