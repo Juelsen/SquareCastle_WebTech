@@ -19,8 +19,8 @@ import scala.swing.Reactor
 
 class GameController @Inject() (cc:ControllerComponents) extends AbstractController(cc) with I18nSupport with Reactor{
 
-  val supervisor: SupervisorInterface = scala.main.supervisor
-  val controller: ControllerInterface = scala.main.Controller
+  var supervisor: SupervisorInterface = scala.main.supervisor
+  var controller: ControllerInterface = scala.main.Controller
   supervisor.controller = controller
   var str:String = ""
 
@@ -35,8 +35,8 @@ class GameController @Inject() (cc:ControllerComponents) extends AbstractControl
     controller.befehl = s
     //supervisor.controller.befehl = s;
     supervisor.newRoundactive()
-    supervisor.state = !supervisor.state
-    supervisor.newRound()
+    //supervisor.state = !supervisor.state
+    //supervisor.newRound()
 
     Ok(views.html.squarecastle("gesendet",supervisor))
 
@@ -48,6 +48,10 @@ class GameController @Inject() (cc:ControllerComponents) extends AbstractControl
   }
 
   def playerSettings(): Action[AnyContent] = Action {
+    supervisor = scala.main.supervisor
+    controller = scala.main.Controller
+    supervisor.controller = controller
+    supervisor.firstround = true;
     Ok(views.html.playerSettings())
   }
 
@@ -56,6 +60,10 @@ class GameController @Inject() (cc:ControllerComponents) extends AbstractControl
   }
 
   def about(): Action[AnyContent] = Action {
+    supervisor = scala.main.supervisor
+    controller = scala.main.Controller
+    supervisor.controller = controller
+    supervisor.firstround = true;
     Ok(views.html.index())
   }
 
@@ -80,7 +88,7 @@ class GameController @Inject() (cc:ControllerComponents) extends AbstractControl
   def sendControllerOutput(): JsValue ={
     //eventuelle Ereignisse als int code
     //'{ "name": "Georg", "alter": 47, "verheiratet": false, "beruf": null}'
-    val data = Array.ofDim[String](6)
+    val data = Array.ofDim[String](7)
     data(0) = Controllerstate.toString
     data(1) = supervisor.controller.ImagePath(supervisor.card, supervisor.card)
     if(layedX != -1 && layedY != -1)
@@ -91,9 +99,10 @@ class GameController @Inject() (cc:ControllerComponents) extends AbstractControl
       data(4) = supervisor.p1.getPoints().toString
     if(supervisor.p2 != null)
       data(5) = supervisor.p2.getPoints().toString
+    data(6) = supervisor.newpoints.toString
 
     val jsonArray = Json.toJson(Seq(
-      toJson(data(0)), toJson(data(1)), toJson(data(2)), toJson(data(3)),toJson(data(4)),toJson(data(5))
+      toJson(data(0)), toJson(data(1)), toJson(data(2)), toJson(data(3)),toJson(data(4)),toJson(data(5)),toJson(data(6))
     ))
     jsonArray
   }
@@ -139,6 +148,7 @@ class GameController @Inject() (cc:ControllerComponents) extends AbstractControl
   def clicked(befehl:String): Unit ={
     controller.befehl = befehl
     println(befehl)
+    println("firstround: "+supervisor.firstround)
     Controllerstate = supervisor.newRoundactive()
     if(Controllerstate != 2){
       supervisor.otherplayer()

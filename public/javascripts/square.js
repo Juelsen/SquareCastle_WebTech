@@ -10,6 +10,8 @@ document.getElementsByTagName('head')[0].appendChild(script);
 
 $(document).ready(function() {
   connectWebSocket();
+  document.body.style.cursor="default";
+
 });
 var websocket = new WebSocket("ws://localhost:9000/websocket");
 
@@ -42,12 +44,13 @@ function sendRequest(meth, path, payload){
 
 }
 function readJson(json){
-  Data[0] = json[0].replaceAll('"',"");
-  Data[1] = json[1].replaceAll('"',"");
-  Data[2] = json[2].replaceAll('"',"");
-  Data[3] = json[3].replaceAll('"',"");
-  Data[4] = json[3].replaceAll('"',"");
-  Data[5] = json[3].replaceAll('"',"");
+  Data[0] = json[0].replaceAll('"',""); //state
+  Data[1] = json[1].replaceAll('"',""); //link neue karte
+  Data[2] = json[2].replaceAll('"',""); //link gesetzte karte
+  Data[3] = json[3].replaceAll('"',""); //spieler der dran ist
+  Data[4] = json[4].replaceAll('"',""); //punkte p1
+  Data[5] = json[5].replaceAll('"',""); //punkte p2
+  Data[6] = json[6].replaceAll('"',""); //neue punkte
 
   updateHTML()
 }
@@ -67,19 +70,24 @@ function updateHTML(){
         turned -= 90;
         document.getElementById("preview").style.transform = 'rotate('+turned+'deg)';
         break;
-      case "wait":
-        break;
+
       default:
         console.log("Instruction not readable "+ instruction);
     }
   }
   else if(Data[0] === "1") {
     turned = 0;
-    //animateImg(0);
+    document.getElementById("punkteAnzeige").innerText = Data[6];
+    animateImg(0);
     console.log("new Picture");
     document.getElementById("newcard").innerHTML = '<img id="preview" class="card-preview" src="/assets/' + Data[1] + '">'
     document.getElementById(clickedX + " " + clickedY).innerHTML = '<img src="/assets/' + Data[2] + '">'
   }
+  else if(Data[0] === "3") {
+    document.getElementById("newcard").innerHTML = '<img id="preview" class="card-preview" src="/assets/' + Data[1] + '">'
+
+  }
+
 
 }
 function startgame(){
@@ -92,7 +100,7 @@ function animateImg(index){
   lock = true;
   document.getElementById('animateImg'+animationindex).style.transition = "right 2s";
   document.getElementById('animateImg'+index).style.transitionTimingFunction = "cubic-bezier(1,.55,.95,1.22)"
-  document.getElementById('animateImg'+index).style.right = 'calc(50%)'
+  document.getElementById('animateImg'+index).style.right = 'calc(100% - 200px)'
   setTimeout(endanimation, 2000);
 }
 function endanimation(){
@@ -102,7 +110,7 @@ function endanimation(){
 }
 function easeout(){
   document.getElementById('animateImg'+animationindex).style.transition = "right 0.75s";
-  document.getElementById('animateImg'+animationindex).style.right = 'calc(100% + 1200px)';
+  document.getElementById('animateImg'+animationindex).style.right = '100%';
 
 }
 function connectWebSocket() {

@@ -31,6 +31,7 @@ $(document).ready(function () {
                 "y": indices[1]
             }
             sendRequest("POST","/squarecastle/api/command", payload)
+            document.body.style.cursor="progress";
             setTimeout(function () {
                 location = "/squarecastle";
             },1000);
