@@ -54,7 +54,6 @@ $(document).ready(function () {
 
 
 });
-var count = 0;
 
 function selectplayer() {
     let selectedone = 0;
