@@ -7,26 +7,31 @@
 
     <div class="container-fluid background-img-startScreen">
 
-        <div class="row">
+        <div class="row topRow">
             <div class="col-12 header">
                 <img src="@routes.Assets.versioned("images/title.png")" width="800">
             </div>
         </div>
-        <div class="row rowToBottom">
+
+        @*<div class="row rowToBottom">
             <div class="col-12 description">
                 <img src="@routes.Assets.versioned("images/description.png")" width="600">
             </div>
-        </div>
+        </div>*@
 
-        <div class="row rowToBottom">
+        <div class="row bottomRow">
             <div class="col-lg-3"></div>
             <div class="col-12 col-lg-6">
-                <div class="row">
-                    <div class="col-6 bottom">
-                        <a class="playerSettings-btn" href="playerSettings"></a>
+                <div class="row bottom">
+                    <div class="col-6">
+                        <div class="centerButton">
+                            <a class="playerSettings-btn" href="playerSettings"></a>
+                        </div>
                     </div>
-                    <div class="col-6 bottom">
-                        <a class="rules-btn" href="rules"></a>
+                    <div class="col-6">
+                        <div class="centerButton">
+                            <a class="rules-btn" href="rules"></a>
+                        </div>
                     </div>
                 </div>
             </div>
