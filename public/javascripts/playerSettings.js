@@ -56,10 +56,10 @@ $(document).ready(function () {
 });
 
 function selectplayer() {
-    let selectedone = 0;
-    let selected = [];
-    let selector1 = document.getElementById("p1Selected");
-    let selector2 = document.getElementById("p2Selected");
+    var selectedone = 0;
+    var selected = [];
+    var selector1 = document.getElementById("p1Selected");
+    var selector2 = document.getElementById("p2Selected");
     if (btnpressed.filter(Boolean).length >= 2)
         return
     selector1.classList.remove("noneSelected");
@@ -93,7 +93,7 @@ function selectplayer() {
         selector2.classList.add("noneSelected");
         return;
     }
-    let count = 0;
+    var count = 0;
     if (btnpressed.filter(Boolean).length === 2) {
         for (var i = 0; i++; i < btnpressed.length) {
             if (btnpressed[i]) {
