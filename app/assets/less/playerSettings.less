@@ -47,6 +47,7 @@
 }
 
 .centered-buttons {
+  padding: 0 0 30px 0;
   position: relative;
   left: 40%;
   width: 100%;
@@ -99,22 +100,27 @@
 
 /* Start --- Button fill color */
 .bluePlayer:hover {
-
   .playerButtons::before {
     width: 120%;
     background-color: @bluePlayerColor;
   }
+}
 
+.redPlayer:hover {
   .playerButtons::before {
     width: 120%;
     background-color: @redPlayerColor;
   }
+}
 
+.greenPlayer:hover {
   .playerButtons::before {
     width: 120%;
     background-color: @greenPlayerColor;
   }
+}
 
+.purplePlayer:hover {
   .playerButtons::before {
     width: 120%;
     background-color: @purplePlayerColor;
@@ -123,7 +129,7 @@
 /* End --- Button fill color */
 
 .player {
-  margin: 80px 0;
+  margin: 80px 0 0 0;
   display: flex;
   align-items: center;
   flex-direction: column
@@ -313,3 +319,38 @@
   -webkit-filter: blur(24px);
   filter: blur(24px);
 }
+
+
+/* Player Selected */
+
+.noneSelected {
+  background: center center no-repeat @noPlayerSelected;
+  background-size: 300px;
+  height: 300px;
+}
+
+.blueSelected {
+  background: center center no-repeat @bluePlayerSelected;
+  background-size: 300px;
+  height: 300px;
+}
+
+.redSelected {
+  background: center center no-repeat @redPlayerSelected;
+  background-size: 300px;
+  height: 300px;
+}
+
+.greenSelected {
+  background: center center no-repeat @greenPlayerSelected;
+  background-size: 300px;
+  height: 300px;
+}
+
+.purpleSelected {
+  background: center center no-repeat @purplePlayerSelected;
+  background-size: 300px;
+  height: 300px;
+}
+
+
