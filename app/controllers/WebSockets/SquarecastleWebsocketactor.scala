@@ -21,7 +21,6 @@ case class SquarecastleWebsocketactor (out: ActorRef, gamecontroller:GameControl
     }
   }
   override def sendJson(): Unit = {
-    println(gamecontroller.sendControllerOutput())
     out ! gamecontroller.sendControllerOutput()
   }
 }

@@ -23,6 +23,10 @@ function calc(source){
     "x": source.getAttribute("x"),
     "y": source.getAttribute("y")
   }
+  if(source.getAttribute("instruction") === "r" )
+    turnright()
+  if(source.getAttribute("instruction") === "l" )
+    turnleft()
   clickedX = source.getAttribute("x");
   clickedY = source.getAttribute("y");
   instruction = source.getAttribute("instruction");
@@ -30,6 +34,21 @@ function calc(source){
   //sendRequest("POST","/squarecastle/api/command", payload)
 }
 
+var turned=0;
+function turnright(){
+  if(turned === undefined)
+    turned = 0;
+  turned += 90;
+  document.getElementById("preview").style.transform = 'rotate('+turned+'deg)';
+  console.log("turn picture "+turned);
+}
+function turnleft(){
+  if(turned === undefined)
+    turned = 0;
+  turned -= 90;
+  document.getElementById("preview").style.transform = 'rotate('+turned+'deg)';
+  console.log("turn picture "+turned);
+}
 function sendRequest(meth, path, payload){
   var request = $.ajax({
     method: meth,
@@ -55,7 +74,6 @@ function readJson(json){
 
   updateHTML()
 }
-var turned=0;
 function updateHTML(){
   console.log("State : " + Data[0])
   if(Data[0] === "2"){
@@ -63,18 +81,11 @@ function updateHTML(){
       turned = 0;
     switch (instruction) {
       case "r":
-        turned += 90;
-        document.getElementById("preview").style.transform = 'rotate('+turned+'deg)';
-        console.log("turn picture "+turned);
-
+        turnright()
         break;
       case "l":
-        turned -= 90;
-        document.getElementById("preview").style.transform = 'rotate('+turned+'deg)';
-        console.log("turn picture "+turned);
-
+        turnleft()
         break;
-
       default:
         console.log("Instruction not readable "+ instruction);
     }
