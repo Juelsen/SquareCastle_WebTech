@@ -23,6 +23,8 @@ class GameController @Inject() (cc:ControllerComponents) extends AbstractControl
   var controller: ControllerInterface = scala.main.Controller
   supervisor.controller = controller
   var str:String = ""
+  var player1name = ""
+  var player2name = ""
   var player1color = ""
   var player2color = ""
   //this.listenTo(controller)
@@ -39,7 +41,7 @@ class GameController @Inject() (cc:ControllerComponents) extends AbstractControl
     //supervisor.state = !supervisor.state
     //supervisor.newRound()
 
-    Ok(views.html.squarecastle("gesendet",supervisor, player1color, player2color))
+    Ok(views.html.squarecastle("gesendet",supervisor,player1color, player2color))
 
   }
   def squarecastle: Action[AnyContent] = Action{
@@ -69,7 +71,6 @@ class GameController @Inject() (cc:ControllerComponents) extends AbstractControl
   }
 
 
-
   def JsonCommand = Action(parse.json) {
     request: Request[JsValue] => {
       val data = readCommand(request.body)
@@ -85,7 +86,7 @@ class GameController @Inject() (cc:ControllerComponents) extends AbstractControl
   def sendControllerOutput(): JsValue ={
     //eventuelle Ereignisse als int code
     //'{ "name": "Georg", "alter": 47, "verheiratet": false, "beruf": null}'
-    val data = Array.ofDim[String](7)
+    val data = Array.ofDim[String](8)
     data(0) = Controllerstate.toString
     data(1) = supervisor.controller.ImagePath(supervisor.card, supervisor.card)
     if(layedX != -1 && layedY != -1)
@@ -97,9 +98,12 @@ class GameController @Inject() (cc:ControllerComponents) extends AbstractControl
     if(supervisor.p2 != null)
       data(5) = supervisor.p2.getPoints().toString
     data(6) = supervisor.newpoints.toString
-
+    if(supervisor.playersturn.toString == player1name)
+      data(7) = player1color
+    else if(supervisor.playersturn.toString == player2name)
+      data(7) = player2color
     val jsonArray = Json.toJson(Seq(
-      toJson(data(0)), toJson(data(1)), toJson(data(2)), toJson(data(3)),toJson(data(4)),toJson(data(5)),toJson(data(6))
+      toJson(data(0)), toJson(data(1)), toJson(data(2)), toJson(data(3)),toJson(data(4)),toJson(data(5)),toJson(data(6)),toJson(data(7))
     ))
     jsonArray
   }
@@ -124,27 +128,38 @@ class GameController @Inject() (cc:ControllerComponents) extends AbstractControl
       val player1 = (value\"x").get.toString.replace("\"", "")
       val player2 = (value\"y").get.toString.replace("\"", "")
       player1 match {
-        case "0" => supervisor.p1 = new Player("Sir Gaheris");
-          player1color = "blue-player"
-        case "1" => supervisor.p1 = new Player("Sir Bedivere")
-          player1color = "red-player"
-        case "2" => supervisor.p1 = new Player("Sir Gareth")
-          player1color = "green-player"
-        case "3" => supervisor.p1 = new Player("Sir Bors")
-          player1color = "purple-player"
-        case _ => supervisor.p1 = new Player("Sir Bors")
+        case "0" =>
+          player1name = "Sir Gaheris"
+          player1color = "blue"
+        case "1" =>
+          player1name = "Sir Bedivere"
+          player1color = "red"
+        case "2" =>
+          player1name = "Sir Gareth"
+          player1color = "green"
+        case "3" =>
+          player1name = "Sir Bors"
+          player1color = "purple"
+        case _ => println("Fehler bei der Spielerindex erkennung")
+
       }
       player2 match {
-        case "0" => supervisor.p2 = new Player("Sir Gaheris")
-          player2color = "blue-player"
-        case "1" => supervisor.p2 = new Player("Sir Bedivere")
-          player2color = "red-player"
-        case "2" => supervisor.p2 = new Player("Sir Gareth")
-          player2color = "green-player"
-        case "3" => supervisor.p2 = new Player("Sir Bors")
-          player2color = "purple-player"
-        case _ => supervisor.p2 = new Player("Sir Bors")
+        case "0" =>
+          player2name = "Sir Gaheris"
+          player2color = "blue"
+        case "1" =>
+          player2name = "Sir Bedivere"
+          player2color = "red"
+        case "2" =>
+          player2name = "Sir Gareth"
+          player2color = "green"
+        case "3" =>
+          player2name = "Sir Bors"
+          player2color = "purple"
+        case _ => println("Fehler bei der Spielerindex erkennung")
       }
+      supervisor.p1 = new Player(player1name)
+      supervisor.p2 = new Player(player2name)
       println(player1color+ ": " + supervisor.p1 + " " + player2color+": "+supervisor.p2)
       return "init"
     }

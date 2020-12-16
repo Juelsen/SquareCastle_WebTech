@@ -10,11 +10,6 @@ document.getElementsByTagName('head')[0].appendChild(script);
 
 $(document).ready(function() {
   connectWebSocket();
-  console.log(player1color+"-player  "+player2color+"-player");
-
-  document.getElementById("selectedPlayer1").classList.add(player1color+"-player");
-  document.getElementById("selectedPlayer2").classList.add(player2color+"-player");
-
   document.body.style.cursor="default";
   turned = 0;
 });
@@ -56,6 +51,7 @@ function readJson(json){
   Data[4] = json[4].replaceAll('"',""); //punkte p1
   Data[5] = json[5].replaceAll('"',""); //punkte p2
   Data[6] = json[6].replaceAll('"',""); //neue punkte
+  Data[7] = json[7].replaceAll('"',""); //neue punkte
 
   updateHTML()
 }
@@ -85,7 +81,16 @@ function updateHTML(){
   }
   else if(Data[0] === "1") {
     turned = 0;
+    //punktediv vorbereiten
+
     document.getElementById("punkteAnzeige").innerText = Data[6];
+    document.getElementById("animateImg").classList.remove("red");
+    document.getElementById("animateImg").classList.remove("green");
+    document.getElementById("animateImg").classList.remove("blue");
+    document.getElementById("animateImg").classList.remove("purple");
+
+    document.getElementById("animateImg").classList.add(Data[7]);
+
     animateImg(0);
     document.getElementById("newcard").innerHTML = '<img id="preview" class="card-preview" src="/assets/' + Data[1] + '">'
     document.getElementById(clickedX + " " + clickedY).innerHTML = '<img src="/assets/' + Data[2] + '">'
@@ -99,17 +104,14 @@ function updateHTML(){
 }
 function startgame(){
   //animateImg(0);
-  console.log(player1color+"-player  "+player2color+"-player");
 
 }
-var animationindex = 0;
 var lock = false;
 function animateImg(index){
-  animationindex = index;
   lock = true;
-  document.getElementById('animateImg'+animationindex).style.transition = "right 0.5s";
-  document.getElementById('animateImg'+index).style.transitionTimingFunction = "ease-out"
-  document.getElementById('animateImg'+index).style.right = 'calc(100% - 200px)'
+  document.getElementById('animateImg').style.transition = "right 0.5s";
+  document.getElementById('animateImg').style.transitionTimingFunction = "ease-out"
+  document.getElementById('animateImg').style.right = 'calc(100% - 200px)'
   setTimeout(endanimation, 1000);
 }
 function endanimation(){
@@ -118,8 +120,8 @@ function endanimation(){
 
 }
 function easeout(){
-  document.getElementById('animateImg'+animationindex).style.transition = "right 0.75s";
-  document.getElementById('animateImg'+animationindex).style.right = '100%';
+  document.getElementById('animateImg').style.transition = "right 0.75s";
+  document.getElementById('animateImg').style.right = '100%';
 
 }
 function connectWebSocket() {
