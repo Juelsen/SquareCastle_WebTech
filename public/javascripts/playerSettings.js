@@ -4,18 +4,6 @@ btnpressed[1] = false;
 btnpressed[2] = false;
 btnpressed[3] = false;
 
-var player1Color = [];
-player1Color[0] = false;
-player1Color[1] = false;
-player1Color[2] = false;
-player1Color[3] = false;
-
-var player2Color = [];
-player2Color[0] = false;
-player2Color[1] = false;
-player2Color[2] = false;
-player2Color[3] = false;
-
 $(document).ready(function () {
     $('#btnP1').click(function() {
         btnpressed[0] = !btnpressed[0];
@@ -45,27 +33,6 @@ $(document).ready(function () {
                 "x": indices[0],
                 "y": indices[1]
             };
-
-            if (indices[0] === 0){
-                player1Color[0] = true;
-            } else if (indices[0] === 1) {
-                player1Color[1] = true;
-            } else if (indices[0] === 2) {
-                player1Color[2] = true;
-            } else if (indices[0] === 3) {
-                player1Color[3] = true;
-            }
-
-            if (indices[1] === 0){
-                player2Color[0] = true;
-            } else if (indices[1] === 1) {
-                player2Color[1] = true;
-            } else if (indices[1] === 2) {
-                player2Color[2] = true;
-            } else if (indices[1] === 3) {
-                player2Color[3] = true;
-            }
-
             sendRequest("POST","/squarecastle/api/command", payload)
             document.body.style.cursor="progress";
             setTimeout(function () {
@@ -82,23 +49,4 @@ $(document).ready(function () {
     //$('#selectedPlayer2').removeAllClasses("");
 
 
-    if (player1Color[0] === true){
-        $('#selectedPlayer1').addClass("blue-player");
-    } else if (player1Color[1] === true) {
-        $('#selectedPlayer1').addClass("red-player");
-    } else if (player1Color[2] === true) {
-        $('#selectedPlayer1').addClass("green-player");
-    } else if (player1Color[3] === true) {
-        $('#selectedPlayer1').addClass("purple-player");
-    }
-
-    if (player2Color[0] === true){
-        $('#selectedPlayer2').addClass("blue-player");
-    } else if (player2Color[1] === true) {
-        $('#selectedPlayer2').addClass("red-player");
-    } else if (player2Color[2] === true) {
-        $('#selectedPlayer2').addClass("green-player");
-    } else if (player2Color[3] === true) {
-        $('#selectedPlayer2').addClass("purple-player");
-    }
 });

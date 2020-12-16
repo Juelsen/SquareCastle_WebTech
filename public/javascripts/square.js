@@ -10,6 +10,11 @@ document.getElementsByTagName('head')[0].appendChild(script);
 
 $(document).ready(function() {
   connectWebSocket();
+  console.log(player1color+"-player  "+player2color+"-player");
+
+  document.getElementById("selectedPlayer1").classList.add(player1color+"-player");
+  document.getElementById("selectedPlayer2").classList.add(player2color+"-player");
+
   document.body.style.cursor="default";
   turned = 0;
 });
@@ -94,6 +99,8 @@ function updateHTML(){
 }
 function startgame(){
   //animateImg(0);
+  console.log(player1color+"-player  "+player2color+"-player");
+
 }
 var animationindex = 0;
 var lock = false;

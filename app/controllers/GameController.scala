@@ -23,7 +23,8 @@ class GameController @Inject() (cc:ControllerComponents) extends AbstractControl
   var controller: ControllerInterface = scala.main.Controller
   supervisor.controller = controller
   var str:String = ""
-
+  var player1color = ""
+  var player2color = ""
   //this.listenTo(controller)
   //reactions += {
   //  case event: InsertedEvent =>
@@ -38,13 +39,13 @@ class GameController @Inject() (cc:ControllerComponents) extends AbstractControl
     //supervisor.state = !supervisor.state
     //supervisor.newRound()
 
-    Ok(views.html.squarecastle("gesendet",supervisor))
+    Ok(views.html.squarecastle("gesendet",supervisor, player1color, player2color))
 
   }
   def squarecastle: Action[AnyContent] = Action{
     supervisor.testfall();
     supervisor.newRound()
-    Ok(views.html.squarecastle(supervisor.controller.ImagePath(supervisor.card, supervisor.card),supervisor))
+    Ok(views.html.squarecastle(supervisor.controller.ImagePath(supervisor.card, supervisor.card),supervisor,player1color,player2color))
   }
 
   def playerSettings(): Action[AnyContent] = Action {
@@ -67,11 +68,7 @@ class GameController @Inject() (cc:ControllerComponents) extends AbstractControl
     Ok(views.html.index())
   }
 
-  def send(supervisor:SupervisorInterface): Unit = {
-    Ok(views.html.squarecastle("empfangen",supervisor))
-    //views.html.squarecastle.apply("empfangen", s , supervisor.playersturn)
-    //views.html.squarecastle.render("empfangen", s , supervisor.playersturn)
-  }
+
 
   def JsonCommand = Action(parse.json) {
     request: Request[JsValue] => {
@@ -127,20 +124,28 @@ class GameController @Inject() (cc:ControllerComponents) extends AbstractControl
       val player1 = (value\"x").get.toString.replace("\"", "")
       val player2 = (value\"y").get.toString.replace("\"", "")
       player1 match {
-        case "0" => supervisor.p1 = new Player("Sir Gaheris")
+        case "0" => supervisor.p1 = new Player("Sir Gaheris");
+          player1color = "blue-player"
         case "1" => supervisor.p1 = new Player("Sir Bedivere")
+          player1color = "red-player"
         case "2" => supervisor.p1 = new Player("Sir Gareth")
+          player1color = "green-player"
         case "3" => supervisor.p1 = new Player("Sir Bors")
+          player1color = "purple-player"
         case _ => supervisor.p1 = new Player("Sir Bors")
       }
       player2 match {
         case "0" => supervisor.p2 = new Player("Sir Gaheris")
+          player2color = "blue-player"
         case "1" => supervisor.p2 = new Player("Sir Bedivere")
+          player2color = "red-player"
         case "2" => supervisor.p2 = new Player("Sir Gareth")
+          player2color = "green-player"
         case "3" => supervisor.p2 = new Player("Sir Bors")
+          player2color = "purple-player"
         case _ => supervisor.p2 = new Player("Sir Bors")
       }
-      println("spieler1 : " + supervisor.p1 + " spieler2 : "+supervisor.p2)
+      println(player1color+ ": " + supervisor.p1 + " " + player2color+": "+supervisor.p2)
       return "init"
     }
     instruction
