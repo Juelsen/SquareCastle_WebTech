@@ -4,22 +4,29 @@ btnpressed[1] = false;
 btnpressed[2] = false;
 btnpressed[3] = false;
 
+var firstPlayer = false;
+var secondPlayer = false;
+
+var pressedPlayer1 = -1;
+var pressedPlayer2 = -1;
+
+
 $(document).ready(function () {
     $('#btnP1').click(function() {
         btnpressed[0] = !btnpressed[0];
-        selectplayer();
+        selectPlayer(0);
     });
     $('#btnP2').click(function() {
         btnpressed[1] = !btnpressed[1];
-        selectplayer();
+        selectPlayer(1);
     });
     $('#btnP3').click(function() {
         btnpressed[2] = !btnpressed[2];
-        selectplayer();
+        selectPlayer(2);
     });
     $('#btnP4').click(function() {
         btnpressed[3] = !btnpressed[3];
-        selectplayer();
+        selectPlayer(3);
     });
     $('#startGame').click(function() {
         if(btnpressed.filter(Boolean).length === 2){
@@ -51,9 +58,58 @@ $(document).ready(function () {
     });
     //($('#selectedPlayer1').removeAllClasses("");
     //$('#selectedPlayer2').removeAllClasses("");
-
-
 });
+
+function selectPlayer(color) {
+    var colorClassname = "";
+
+    switch (color) {
+        case 0:
+            colorClassname = "blueSelected";
+            break;
+        case 1:
+            colorClassname = "redSelected";
+            break;
+        case 2:
+            colorClassname = "greenSelected";
+            break;
+        case 3:
+            colorClassname = "purpleSelected";
+            break;
+    }
+
+    if (btnpressed[color] === true) {
+        if (firstPlayer === false && pressedPlayer1 === -1) {
+            firstPlayer = true;
+            pressedPlayer1 = color;
+            document.getElementById("p1Selected").className = "";
+            document.getElementById("p1Selected").classList.add(colorClassname);
+        } else if (secondPlayer === false && pressedPlayer2 === -1) {
+            secondPlayer = true;
+            pressedPlayer2 = color;
+            document.getElementById("p2Selected").className = "";
+            document.getElementById("p2Selected").classList.add(colorClassname);
+        } else {
+            alert("Zu viele Spieler ausgewählt! Du musst zuerst einen bereits ausgewählten Spieler wieder entfernen.");
+            btnpressed[color] = false;
+        }
+    } else {
+        if(firstPlayer === true && pressedPlayer1 === color) {
+            firstPlayer = false;
+            pressedPlayer1 = -1;
+            document.getElementById("p1Selected").className = "";
+            document.getElementById("p1Selected").classList.add("noneSelected");
+        } else if (secondPlayer === true && pressedPlayer2 === color) {
+            secondPlayer = false;
+            pressedPlayer2 = -1;
+            document.getElementById("p2Selected").className = "";
+            document.getElementById("p2Selected").classList.add("noneSelected");
+        }
+    }
+}
+
+
+/*
 
 function selectplayer() {
     var selectedone = 0;
@@ -118,4 +174,4 @@ function selectplayer() {
         if (selected[1] === 3)
             selector2.classList.add("purpleSelected");
     }
-}
+}*/

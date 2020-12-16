@@ -30,6 +30,8 @@ class GameController @Inject() (cc:ControllerComponents) (implicit system: Actor
   var player2name = ""
   var player1color = ""
   var player2color = ""
+  var player1points = ""
+  var player2points = ""
   //this.listenTo(controller)
   //reactions += {
   //  case event: InsertedEvent =>
@@ -44,13 +46,13 @@ class GameController @Inject() (cc:ControllerComponents) (implicit system: Actor
     //supervisor.state = !supervisor.state
     //supervisor.newRound()
 
-    Ok(views.html.squarecastle("gesendet",supervisor,player1color, player2color))
+    Ok(views.html.squarecastle("gesendet",supervisor,player1color, player2color, player1name, player2name))
 
   }
   def squarecastle: Action[AnyContent] = Action{
     supervisor.testfall();
     supervisor.newRound()
-    Ok(views.html.squarecastle(supervisor.controller.ImagePath(supervisor.card, supervisor.card),supervisor,player1color,player2color))
+    Ok(views.html.squarecastle(supervisor.controller.ImagePath(supervisor.card, supervisor.card),supervisor,player1color,player2color, player1name, player2name))
   }
 
   def playerSettings(): Action[AnyContent] = Action {
@@ -96,10 +98,14 @@ class GameController @Inject() (cc:ControllerComponents) (implicit system: Actor
       data(2) = supervisor.controller.ImagePath(supervisor.map.field(layedX)(layedY), supervisor.map.field(layedX)(layedY))
     if(supervisor.playersturn != null)
       data(3) = supervisor.playersturn.toString
-    if(supervisor.p1 != null)
+    if(supervisor.p1 != null) {
       data(4) = supervisor.p1.getPoints().toString
-    if(supervisor.p2 != null)
+      player1points = data(4)
+    }
+    if(supervisor.p2 != null) {
       data(5) = supervisor.p2.getPoints().toString
+      player1points = data(5)
+    }
     data(6) = supervisor.newpoints.toString
     if(supervisor.playersturn != null && supervisor.playersturn.toString == player1name)
       data(7) = player1color

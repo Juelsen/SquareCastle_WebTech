@@ -5,7 +5,7 @@
 * message to display.
 *@
 @import javax.imageio.ImageIO
-@(s: String, supervisor: SupervisorInterface, player1color:String, player2color:String)
+@(s: String, supervisor: SupervisorInterface, player1color:String, player2color:String, player1name:String, player2name:String)
 @*
 * Call the `main` template with two arguments. The first
 * argument is a `String` with the title of the page, the second
@@ -20,7 +20,7 @@
 
 
     <script>
-        function getPath(var x, var y){
+        function getPath(var x, var y) {
             @routes.Assets.versioned(supervisor.controller.ImagePath(supervisor.map.field(0)(0), supervisor.card))
         }
     </script>
@@ -52,10 +52,24 @@
             <div class="col-12 col-xl-3">
                 <div class="row">
                     <div class="col-12 col-md-6 col-xl-12">
-                        <div id="selectedPlayer1" class="@player1color-player"></div>
+                        <div id="selectedPlayer1" class="@player1color-player">
+                            <div class="playerName">
+                                <p>@player1name</p>
+                            </div>
+                            <div class="playerPoints">
+                                <p id="p1Points">0 Pts</p>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-12 col-md-6 col-xl-12">
-                        <div id="selectedPlayer2" class="@player2color-player"></div>
+                        <div id="selectedPlayer2" class="@player2color-player">
+                            <div class="playerName">
+                                <p>@player2name</p>
+                            </div>
+                            <div class="playerPoints">
+                                <p id="p2Points">0 Pts</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 @*<p>Its player</p>
@@ -89,8 +103,8 @@
             <div class="col-12">
                 <div class="row">
                     <div class="col-sm-1 col-md-2 col-lg-3 col-xl-4"></div>
-                    <div class="col-12 col-sm-11 col-md-10 col-lg-9 col-xl-8">
-                        <section class="wrapper">
+                    <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-4">
+                        <section class="centerToolbar">
                             <div id="l" class="left-background">
                                 <button class="toolbar-button" instruction="l" onclick="calc(this);"></button>
                             </div>
@@ -102,6 +116,7 @@
                             </div>
                         </section>
                     </div>
+                    <div class="col-sm-1 col-md-2 col-lg-3 col-xl-4"></div>
                 </div>
             </div>
         </div>

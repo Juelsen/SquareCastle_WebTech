@@ -17,20 +17,20 @@ $(document).ready(function() {
 
 function calc(source){
   if(lock)
-    return
+    return;
   var payload = {
     "instruction": source.getAttribute("instruction"),
     "x": source.getAttribute("x"),
     "y": source.getAttribute("y")
-  }
+  };
   if(source.getAttribute("instruction") === "r" )
-    turnright()
+    turnright();
   if(source.getAttribute("instruction") === "l" )
-    turnleft()
+    turnleft();
   clickedX = source.getAttribute("x");
   clickedY = source.getAttribute("y");
   instruction = source.getAttribute("instruction");
-  websocket.send(JSON.stringify(payload))
+  websocket.send(JSON.stringify(payload));
   //sendRequest("POST","/squarecastle/api/command", payload)
 }
 
@@ -57,7 +57,7 @@ function sendRequest(meth, path, payload){
     dataType: "json",
     contentType: "application/json",
     success: function(JsonAr){
-      readJson(JsonAr)
+      readJson(JsonAr);
     }
   });
 
@@ -75,16 +75,16 @@ function readJson(json){
   updateHTML()
 }
 function updateHTML(){
-  console.log("State : " + Data[0])
+  console.log("State : " + Data[0]);
   if(Data[0] === "2"){
     if(turned === undefined)
       turned = 0;
     switch (instruction) {
       case "r":
-        turnright()
+        turnright();
         break;
       case "l":
-        turnleft()
+        turnleft();
         break;
       default:
         console.log("Instruction not readable "+ instruction);
@@ -95,6 +95,8 @@ function updateHTML(){
     //punktediv vorbereiten
 
     document.getElementById("punkteAnzeige").innerText = Data[6];
+    document.getElementById("p1Points").innerText = Data[5] + " Pts";
+    document.getElementById("p2Points").innerText = Data[4] + " Pts";
     document.getElementById("animateImg").classList.remove("red");
     document.getElementById("animateImg").classList.remove("green");
     document.getElementById("animateImg").classList.remove("blue");
@@ -103,11 +105,11 @@ function updateHTML(){
     document.getElementById("animateImg").classList.add(Data[7]);
 
     animateImg(0);
-    document.getElementById("newcard").innerHTML = '<img id="preview" class="card-preview" src="/assets/' + Data[1] + '">'
-    document.getElementById(clickedX + " " + clickedY).innerHTML = '<img src="/assets/' + Data[2] + '">'
+    document.getElementById("newcard").innerHTML = '<img id="preview" class="card-preview" src="/assets/' + Data[1] + '">';
+    document.getElementById(clickedX + " " + clickedY).innerHTML = '<img src="/assets/' + Data[2] + '">';
   }
   else if(Data[0] === "3") {
-    document.getElementById("newcard").innerHTML = '<img id="preview" class="card-preview" src="/assets/' + Data[1] + '">'
+    document.getElementById("newcard").innerHTML = '<img id="preview" class="card-preview" src="/assets/' + Data[1] + '">';
 
   }
 
@@ -125,8 +127,8 @@ var lock = false;
 function animateImg(index){
   lock = true;
   document.getElementById('animateImg').style.transition = "right 0.5s";
-  document.getElementById('animateImg').style.transitionTimingFunction = "ease-out"
-  document.getElementById('animateImg').style.right = 'calc(100% - 200px)'
+  document.getElementById('animateImg').style.transitionTimingFunction = "ease-out";
+  document.getElementById('animateImg').style.right = 'calc(100% - 200px)';
   setTimeout(endanimation, 1000);
 }
 function endanimation(){
@@ -145,7 +147,7 @@ function connectWebSocket() {
 
   websocket.onopen = function(event) {
     console.log("Trying to connect to Server");
-  }
+  };
 
   websocket.onclose = function () {
     console.log('Connection Closed!');
@@ -162,13 +164,13 @@ function connectWebSocket() {
    * @param {*} e : received event
    */
   websocket.onmessage = function (e) {
-      console.log("reveived message: "+e)
+      console.log("reveived message: "+e);
 
-    readWierdMessagefromWebsocket(e.data)
-    }
+    readWierdMessagefromWebsocket(e.data);
+    };
 }
 function readWierdMessagefromWebsocket(data){
-  let json = JSON.parse(data)
+  var json = JSON.parse(data)
   Data[0] = json[0].replaceAll('"',"").replaceAll(String.fromCharCode(92),''); //state
   Data[1] = json[1].replaceAll('"',"").replaceAll(String.fromCharCode(92),''); //link neue karte
   Data[2] = json[2].replaceAll('"',"").replaceAll(String.fromCharCode(92),''); //link gesetzte karte
@@ -180,5 +182,5 @@ function readWierdMessagefromWebsocket(data){
 
   console.log(Data);
   console.log(instruction);
-  updateHTML()
+  updateHTML();
 }

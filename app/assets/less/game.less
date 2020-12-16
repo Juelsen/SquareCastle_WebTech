@@ -5,6 +5,7 @@
   .background-img();
 }
 
+
 /*-------------------------Top-Row------------------------------------*/
 .title {
   float: left;
@@ -25,10 +26,10 @@
 /*-------------------------Mid-Row-----------------------------------*/
 
 .playerStats {
-  margin: 0 auto;
+  margin: 5px auto 15px;
   height: 235px;
   width: 300px;
-  background-size: 106%;
+  background-size: 120%;
 }
 
 .blue-player {
@@ -50,6 +51,27 @@
   background: no-repeat center @purplePlayerBanner;
   .playerStats();
 }
+
+
+.playerName {
+  width: 80px;
+  position: absolute;
+  top: 50%;
+  left: 42%;
+  text-align: center;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.playerPoints {
+  width: 100px;
+  position: absolute;
+  top: 64%;
+  left: 39%;
+  text-align: center;
+  font-weight: bold;
+}
+
 
 section.mapWrapper {
   max-width: 980px;
@@ -91,6 +113,12 @@ section.mapWrapper {
   margin: 15px 0 0 30px;
 }
 /*-------------------------Bottom-Column------------------------------*/
+
+.centerToolbar {
+  position: relative;
+  top: -20%;
+  left: 20%;
+}
 
 section.wrapper {
   max-width: 100%;
