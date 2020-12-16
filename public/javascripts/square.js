@@ -11,7 +11,7 @@ document.getElementsByTagName('head')[0].appendChild(script);
 $(document).ready(function() {
   connectWebSocket();
   document.body.style.cursor="default";
-
+  turned = 0;
 });
 var websocket = new WebSocket("ws://localhost:9000/websocket");
 
@@ -58,17 +58,20 @@ var turned=0;
 function updateHTML(){
   console.log("State : " + Data[0])
   if(Data[0] === "2"){
-    console.log("turn picture");
-    console.log(turned);
-
+    if(turned === undefined)
+      turned = 0;
     switch (instruction) {
       case "r":
         turned += 90;
         document.getElementById("preview").style.transform = 'rotate('+turned+'deg)';
+        console.log("turn picture "+turned);
+
         break;
       case "l":
         turned -= 90;
         document.getElementById("preview").style.transform = 'rotate('+turned+'deg)';
+        console.log("turn picture "+turned);
+
         break;
 
       default:
@@ -79,7 +82,6 @@ function updateHTML(){
     turned = 0;
     document.getElementById("punkteAnzeige").innerText = Data[6];
     animateImg(0);
-    console.log("new Picture");
     document.getElementById("newcard").innerHTML = '<img id="preview" class="card-preview" src="/assets/' + Data[1] + '">'
     document.getElementById(clickedX + " " + clickedY).innerHTML = '<img src="/assets/' + Data[2] + '">'
   }
@@ -98,14 +100,14 @@ var lock = false;
 function animateImg(index){
   animationindex = index;
   lock = true;
-  document.getElementById('animateImg'+animationindex).style.transition = "right 2s";
-  document.getElementById('animateImg'+index).style.transitionTimingFunction = "cubic-bezier(1,.55,.95,1.22)"
+  document.getElementById('animateImg'+animationindex).style.transition = "right 0.5s";
+  document.getElementById('animateImg'+index).style.transitionTimingFunction = "ease-out"
   document.getElementById('animateImg'+index).style.right = 'calc(100% - 200px)'
-  setTimeout(endanimation, 2000);
+  setTimeout(endanimation, 1000);
 }
 function endanimation(){
   lock = false;
-  setTimeout(easeout, 500);
+  setTimeout(easeout, 1500);
 
 }
 function easeout(){
