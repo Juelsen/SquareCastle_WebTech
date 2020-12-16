@@ -1,6 +1,10 @@
 package controllers
 
-import akka.actor.Props
+import akka.actor.{ActorSystem, Props}
+import _root_.controllers.WebSockets.SquarecastleWebsocketactor
+import akka.stream.Materializer
+import play.api.Play.materializer
+
 //import controllers.WebSockets.SquarecastleWebsocketactor
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.scala.ScalaObjectMapper
@@ -16,8 +20,7 @@ import play.api.libs.streams.ActorFlow
 
 import scala.swing.Reactor
 
-
-class GameController @Inject() (cc:ControllerComponents) extends AbstractController(cc) with I18nSupport with Reactor{
+class GameController @Inject() (cc:ControllerComponents) (implicit system: ActorSystem, mat: Materializer) extends AbstractController(cc) with I18nSupport with Reactor{
 
   var supervisor: SupervisorInterface = scala.main.supervisor
   var controller: ControllerInterface = scala.main.Controller
@@ -98,9 +101,9 @@ class GameController @Inject() (cc:ControllerComponents) extends AbstractControl
     if(supervisor.p2 != null)
       data(5) = supervisor.p2.getPoints().toString
     data(6) = supervisor.newpoints.toString
-    if(supervisor.playersturn.toString == player1name)
+    if(supervisor.playersturn != null && supervisor.playersturn.toString == player1name)
       data(7) = player1color
-    else if(supervisor.playersturn.toString == player2name)
+    else if(supervisor.playersturn != null && supervisor.playersturn.toString == player2name)
       data(7) = player2color
     val jsonArray = Json.toJson(Seq(
       toJson(data(0)), toJson(data(1)), toJson(data(2)), toJson(data(3)),toJson(data(4)),toJson(data(5)),toJson(data(6)),toJson(data(7))
@@ -176,9 +179,10 @@ class GameController @Inject() (cc:ControllerComponents) extends AbstractControl
     }
     //update website
   }
-  /*def socket = WebSocket.accept[JsValue, JsValue] { request =>
+ // def socket = new SquarecastleWebsocketactor(out,supervisor,this)
+  def socket = WebSocket.accept[JsValue, JsValue] { request =>
     ActorFlow.actorRef { out =>
-      Props(SquarecastleWebsocketactor(out, supervisor))
+      Props(SquarecastleWebsocketactor(out, this))
     }
-  }*/
+  }
 }

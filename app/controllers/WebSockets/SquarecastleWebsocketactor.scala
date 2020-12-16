@@ -1,20 +1,27 @@
-/*package controllers.WebSockets
+package controllers.WebSockets
 
 import akka.actor.{Actor, ActorRef}
-import gamecontrol.supervisor.supervisor
+import gamecontrol.supervisor.SupervisorInterface
 import play.api.libs.json.{JsValue, Json}
 import controllers.GameController
-class SquarecastleWebsocketactor (out: ActorRef, supervisor: supervisor) extends WebsocketsTrait{
-  listenTo(supervisor)
-  reactions += { case event: Any => sendJson(supervisor) }
+import gamecontrol.{CardChangedEvent, NewRoundEvent}
+case class SquarecastleWebsocketactor (out: ActorRef, gamecontroller:GameController) extends WebsocketsTrait{
+  listenTo(gamecontroller.supervisor)
+  reactions += {
+    case event: CardChangedEvent => sendJson()
+    case event: NewRoundEvent => sendJson()
+
+  }
 
   override def receive: Actor.Receive = {
     case msg: JsValue => {
-      val data = readCommand(request.body)
+      val data = gamecontroller.readCommand(msg)
       if(data != "init")
-        clicked(data)
+        gamecontroller.clicked(data)
     }
   }
-  override def sendJson(supervisor: supervisor): Unit = out ! (sendControllerOutput())
-
-}*/
+  override def sendJson(): Unit = {
+    println(gamecontroller.sendControllerOutput())
+    out ! gamecontroller.sendControllerOutput()
+  }
+}

@@ -7,13 +7,13 @@ script.src = 'https://code.jquery.com/jquery-3.4.1.min.js';
 script.type = 'text/javascript';
 document.getElementsByTagName('head')[0].appendChild(script);
 
+var websocket;
 
 $(document).ready(function() {
-  connectWebSocket();
   document.body.style.cursor="default";
   turned = 0;
 });
-var websocket = new WebSocket("ws://localhost:9000/websocket");
+
 
 function calc(source){
   if(lock)
@@ -26,8 +26,8 @@ function calc(source){
   clickedX = source.getAttribute("x");
   clickedY = source.getAttribute("y");
   instruction = source.getAttribute("instruction");
-  //websocket.send(JSON.stringify(payload))
-  sendRequest("POST","/squarecastle/api/command", payload)
+  websocket.send(JSON.stringify(payload))
+  //sendRequest("POST","/squarecastle/api/command", payload)
 }
 
 function sendRequest(meth, path, payload){
@@ -103,6 +103,10 @@ function updateHTML(){
 
 }
 function startgame(){
+  websocket = new WebSocket("ws://localhost:9000/websocket");
+
+  connectWebSocket();
+
   //animateImg(0);
 
 }
@@ -147,6 +151,23 @@ function connectWebSocket() {
    * @param {*} e : received event
    */
   websocket.onmessage = function (e) {
+      console.log("reveived message: "+e)
 
+    readWierdMessagefromWebsocket(e.data)
     }
+}
+function readWierdMessagefromWebsocket(data){
+  let json = JSON.parse(data)
+  Data[0] = json[0].replaceAll('"',"").replaceAll(String.fromCharCode(92),''); //state
+  Data[1] = json[1].replaceAll('"',"").replaceAll(String.fromCharCode(92),''); //link neue karte
+  Data[2] = json[2].replaceAll('"',"").replaceAll(String.fromCharCode(92),''); //link gesetzte karte
+  Data[3] = json[3].replaceAll('"',"").replaceAll(String.fromCharCode(92),''); //spieler der dran ist
+  Data[4] = json[4].replaceAll('"',"").replaceAll(String.fromCharCode(92),''); //punkte p1
+  Data[5] = json[5].replaceAll('"',"").replaceAll(String.fromCharCode(92),''); //punkte p2
+  Data[6] = json[6].replaceAll('"',"").replaceAll(String.fromCharCode(92),''); //neue punkte
+  Data[7] = json[7].replaceAll('"',"").replaceAll(String.fromCharCode(92),''); //neue punkte
+
+  console.log(Data);
+  console.log(instruction);
+  updateHTML()
 }
