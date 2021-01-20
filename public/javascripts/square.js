@@ -14,6 +14,16 @@ $(document).ready(function() {
   turned = 0;
 });
 
+//_______________________________________________________
+function initializevalues(p1name,p2name,p1color,p2color){
+  document.getElementById("selectedPlayer1").classList.add(p1color+"-player");
+  document.getElementById("selectedPlayer2").classList.add(p2color+"-player");
+  document.getElementById("p1name").innerHTML = "<p>"+p1name+"</p>";
+  document.getElementById("p2name").innerHTML = "<p>"+p2name+"</p>";
+}
+
+
+
 
 function calc(source){
   if(lock)

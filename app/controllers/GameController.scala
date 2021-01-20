@@ -11,7 +11,7 @@ import com.fasterxml.jackson.module.scala.ScalaObjectMapper
 import gamecontrol.supervisor.{SupervisorInterface, supervisor}
 import gamecontrol.controller.{Controller, ControllerInterface}
 import gamemodel.model.PlayerComponent.Player
-
+import akka.actor.{ActorSystem, _}
 import javax.inject.Inject
 import play.api.mvc.{AbstractController, Action, AnyContent, ControllerComponents, Request, WebSocket}
 import play.api.i18n.I18nSupport
@@ -46,13 +46,13 @@ class GameController @Inject() (cc:ControllerComponents) (implicit system: Actor
     //supervisor.state = !supervisor.state
     //supervisor.newRound()
 
-    Ok(views.html.squarecastle("gesendet",supervisor,player1color, player2color, player1name, player2name))
+    Ok(views.html.squarecastle("gesendet",supervisor,player1color, player2color, player1name, player2name)).withHeaders("Acces-Control-Allow-Origin"->"http://localhost:8080")
 
   }
   def squarecastle: Action[AnyContent] = Action{
     supervisor.testfall();
     supervisor.newRound()
-    Ok(views.html.squarecastle(supervisor.controller.ImagePath(supervisor.card, supervisor.card),supervisor,player1color,player2color, player1name, player2name))
+    Ok(views.html.squarecastle(supervisor.controller.ImagePath(supervisor.card, supervisor.card),supervisor,player1color,player2color, player1name, player2name)).withHeaders("Acces-Control-Allow-Origin"->"http://localhost:8080")
   }
 
   def playerSettings(): Action[AnyContent] = Action {
@@ -60,11 +60,11 @@ class GameController @Inject() (cc:ControllerComponents) (implicit system: Actor
     controller = scala.main.Controller
     supervisor.controller = controller
     supervisor.firstround = true;
-    Ok(views.html.playerSettings())
+    Ok(views.html.playerSettings()).withHeaders("Acces-Control-Allow-Origin"->"http://localhost:8080")
   }
 
   def rules(): Action[AnyContent] = Action {
-    Ok(views.html.rules())
+    Ok(views.html.rules()).withHeaders("Acces-Control-Allow-Origin"->"http://localhost:8080")
   }
 
   def about(): Action[AnyContent] = Action {
@@ -72,7 +72,7 @@ class GameController @Inject() (cc:ControllerComponents) (implicit system: Actor
     controller = scala.main.Controller
     supervisor.controller = controller
     supervisor.firstround = true;
-    Ok(views.html.index())
+    Ok(views.html.index()).withHeaders("Acces-Control-Allow-Origin"->"http://localhost:8080")
   }
 
 
@@ -81,7 +81,9 @@ class GameController @Inject() (cc:ControllerComponents) (implicit system: Actor
       val data = readCommand(request.body)
       if(data != "init")
         clicked(data)
-      Ok(sendControllerOutput())
+      Ok(sendControllerOutput()).withHeaders("Acces-Control-Allow-Origin"->"http://localhost:8080")
+
+
     }
   }
 
@@ -122,7 +124,7 @@ class GameController @Inject() (cc:ControllerComponents) (implicit system: Actor
     JacksMapper.writeValueAsString(value)
   }
   def SendController = Action(parse.json) {
-    Ok(sendControllerOutput())
+    Ok(sendControllerOutput()).withHeaders("Acces-Control-Allow-Origin"->"http://localhost:8080")
   }
   def readCommand(value: JsValue): (String) ={
     val instruction = (value\"instruction").get.toString.replace("\"", "")
