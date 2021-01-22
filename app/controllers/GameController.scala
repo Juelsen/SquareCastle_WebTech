@@ -140,32 +140,32 @@ class GameController @Inject() (cc:ControllerComponents) (implicit system: Actor
       val player2 = (value\"y").get.toString.replace("\"", "")
       player1 match {
         case "0" =>
-          player1name = "Sir Gaheris"
+          player1name = "Sir Bors"
           player1color = "blue"
         case "1" =>
-          player1name = "Sir Bedivere"
+          player1name = "King Ludwig"
           player1color = "red"
         case "2" =>
-          player1name = "Sir Gareth"
+          player1name = "Boltar"
           player1color = "green"
         case "3" =>
-          player1name = "Sir Bors"
+          player1name = "Arokh"
           player1color = "purple"
         case _ => println("Fehler bei der Spielerindex erkennung")
 
       }
       player2 match {
         case "0" =>
-          player2name = "Sir Gaheris"
+          player2name = "Sir Bors"
           player2color = "blue"
         case "1" =>
-          player2name = "Sir Bedivere"
+          player2name = "King Ludwig"
           player2color = "red"
         case "2" =>
-          player2name = "Sir Gareth"
+          player2name = "Boltar"
           player2color = "green"
         case "3" =>
-          player2name = "Sir Bors"
+          player2name = "Arokh"
           player2color = "purple"
         case _ => println("Fehler bei der Spielerindex erkennung")
       }

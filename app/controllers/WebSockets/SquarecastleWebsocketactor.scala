@@ -10,7 +10,6 @@ case class SquarecastleWebsocketactor (out: ActorRef, gamecontroller:GameControl
   reactions += {
     case event: CardChangedEvent => sendJson()
     case event: NewRoundEvent => sendJson()
-
   }
 
   override def receive: Actor.Receive = {
